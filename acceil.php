@@ -21,7 +21,7 @@
 <div class="container">
 
 <a class="navbar-brand brand-logo" href="#">
-<span>FOM</span>COIN
+<span>FOM</span>loic
 </a>
 
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
