@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LEBONdndjbnjcbjscbCOIn</title>
+<title>LEBONCOIN GRP 4</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 <div class="container">
 
 <a class="navbar-brand brand-logo" href="#">
-<span>FOM</span>loic
+<span>lebon</span>coin
 </a>
 
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -30,15 +30,15 @@
 <div class="collapse navbar-collapse" id="mainNav">
 
 <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-<li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
-<li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+<li class="nav-item"><a class="nav-link active" href="#">Accueil</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Vente</a></li>
+<li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
 <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
 </ul>
 
 <div class="d-flex align-items-center gap-3">
-<a class="nav-link p-0" href="#">login</a>
+<a class="nav-link p-0" href="#">Se connecter</a>
 <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
 <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
 </div>
@@ -78,8 +78,8 @@
 <p class="lead">Découvrez le smartphone nouvelle génération.</p>
 
 <div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Shop Now</button>
-<button class="btn btn-outline-secondary btn-lg">Learn More</button>
+<button class="btn btn-danger btn-lg">Achetez maintenant</button>
+<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
 </div>
 
 </div>
@@ -103,8 +103,8 @@
 <p class="lead">Découvrez nos écouteurs nouvelle génération.</p>
 
 <div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Shop Now</button>
-<button class="btn btn-outline-secondary btn-lg">Learn More</button>
+<button class="btn btn-danger btn-lg">Achetez maintenant</button>
+<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
 </div>
 
 </div>
@@ -128,8 +128,8 @@
 <p class="lead">Suivez votre santé et vos activités.</p>
 
 <div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Shop Now</button>
-<button class="btn btn-outline-secondary btn-lg">Learn More</button>
+<button class="btn btn-danger btn-lg">Achetez maintenant</button>
+<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
 </div>
 
 </div>
@@ -153,8 +153,8 @@
 <p class="lead">Découvrez nos laptops nouvelle génération.</p>
 
 <div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Shop Now</button>
-<button class="btn btn-outline-secondary btn-lg">Learn More</button>
+<button class="btn btn-danger btn-lg">Achetez maintenant</button>
+<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
 </div>
 
 </div>
@@ -178,8 +178,8 @@
 <p class="lead">La console nouvelle génération.</p>
 
 <div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Shop Now</button>
-<button class="btn btn-outline-secondary btn-lg">Learn More</button>
+<button class="btn btn-danger btn-lg">Achetez maintenant</button>
+<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
 </div>
 
 </div>
@@ -203,8 +203,8 @@
 <p class="lead">Une enceinte connectée intelligente.</p>
 
 <div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Shop Now</button>
-<button class="btn btn-outline-secondary btn-lg">Learn More</button>
+<button class="btn btn-danger btn-lg">Achetez maintenant</button>
+<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
 </div>
 
 </div>
@@ -236,10 +236,10 @@
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-dark">
 <div class="promo-content">
-<small>Enjoy</small>
-<h3>With</h3>
+<small>Profiter</small>
+<h3>Avec</h3>
 <div class="promo-bgword">AirPods</div>
-<a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Browse</a>
+<a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/AirPods-Max-5-600x600.png">
 </div>
@@ -248,10 +248,10 @@
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-yellow">
 <div class="promo-content">
-<small>New</small>
-<h3>Wear</h3>
+<small>Nouveau</small>
+<h3>Porter</h3>
 <div class="promo-bgword">GADGET</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Browse</a>
+<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/pngegg.png">
 </div>
@@ -260,10 +260,10 @@
 <div class="col-lg-4">
 <div class="promo-card promo-red">
 <div class="promo-content">
-<small>Trend</small>
-<h3>Devices</h3>
+<small>S'orienter</small>
+<h3>Appareils</h3>
 <div class="promo-bgword">LAPTOP</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Browse</a>
+<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/pngegg (2).png">
 </div>
@@ -272,10 +272,10 @@
 <div class="col-lg-4">
 <div class="promo-card promo-light">
 <div class="promo-content">
-<small>Best</small>
-<h3>Gaming</h3>
+<small>Meilleur</small>
+<h3>Jeux</h3>
 <div class="promo-bgword">CONSOLE</div>
-<a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Browse</a>
+<a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/ps5-console-png-ywbv2gv3gfw23o3w.png">
 </div>
@@ -284,10 +284,10 @@
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-green">
 <div class="promo-content">
-<small>Play</small>
-<h3>Game</h3>
+<small>Jouer</small>
+<h3>Jeux</h3>
 <div class="promo-bgword">CASQUE VR</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Browse</a>
+<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/pngegg (3).png">
 </div>
@@ -296,10 +296,10 @@
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-blue">
 <div class="promo-content">
-<small>New</small>
+<small>Nouveau</small>
 <h3>Amazon</h3>
 <div class="promo-bgword">ENCEINTE</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Browse</a>
+<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/pngegg (4).png">
 </div>
@@ -403,9 +403,9 @@ smartphones, accessoires, gaming et plus encore.
 Produits
 </h5>
 
-<p><a href="#" class="text-light text-decoration-none">Smartphones</a></p>
+<p><a href="#" class="text-light text-decoration-none">Téléphones</a></p>
 <p><a href="#" class="text-light text-decoration-none">Casques</a></p>
-<p><a href="#" class="text-light text-decoration-none">Gaming</a></p>
+<p><a href="#" class="text-light text-decoration-none">Jeux</a></p>
 <p><a href="#" class="text-light text-decoration-none">Accessoires</a></p>
 </div>
 
