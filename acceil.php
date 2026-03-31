@@ -39,6 +39,7 @@
 
 <div class="d-flex align-items-center gap-3">
 <a class="nav-link p-0" href="#">Se connecter</a>
+<a class="nav-link p-0" href="inscription.php">S'inscrire</a>
 <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
 <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
 </div>
