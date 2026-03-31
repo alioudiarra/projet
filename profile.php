@@ -83,9 +83,9 @@ if ($stmtAnnonces) {
 
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                   <li class="nav-item"><a class="nav-link active" href="#">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Vente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
@@ -331,9 +331,9 @@ if ($stmtAnnonces) {
                 <div class="col-md-3">
                     <h4 class="fw-bold mb-3">PRODUITS</h4>
                     <ul class="list-unstyled">
-                        <li class="mb-2">Smartphones</li>
+                        <li class="mb-2">Telephones</li>
                         <li class="mb-2">Casques</li>
-                        <li class="mb-2">Gaming</li>
+                        <li class="mb-2">jeux</li>
                         <li class="mb-2">Accessoires</li>
                     </ul>
                 </div>
