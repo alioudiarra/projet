@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,33 +21,58 @@
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
 <div class="container">
 
-<a class="navbar-brand brand-logo" href="#">
-<span>lebon</span>coin
-</a>
+    <a class="navbar-brand brand-logo" href="#">
+        <span>lebon</span>coin
+    </a>
 
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-<span class="navbar-toggler-icon"></span>
-</button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<div class="collapse navbar-collapse" id="mainNav">
+    <div class="collapse navbar-collapse" id="mainNav">
 
-<ul class="navbar-nav ms-3 me-auto gap-lg-3">
-<li class="nav-item"><a class="nav-link active" href="#">Accueil</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Vente</a></li>
-<li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-</ul>
+        <ul class="navbar-nav ms-3 me-auto gap-lg-3">
+            <li class="nav-item"><a class="nav-link active" href="acceil.php">Accueil</a></li>
 
-<div class="d-flex align-items-center gap-3">
-<a class="nav-link p-0" href="#">Se connecter</a>
-<a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-<a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
-</div>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Vente
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
+                    <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
+                    <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
+                    <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger fw-bold" href="#categories">Voir tout</a></li>
+                </ul>
+            </li>
 
-</div>
+            <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3">
+
+            <?php if (isset($_SESSION['id_u'])) : ?>
+                <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
+                    <i class="bi bi-person-fill text-danger"></i>
+                    <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
+                </a>
+                <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
+            <?php else : ?>
+                <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
+            <?php endif; ?>
+
+            <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
+            <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
+        </div>
+
+    </div>
 </div>
 </nav>
+
 
 
 <!-- HERO CAROUSEL -->
@@ -231,14 +258,14 @@
 <!-- SECTION CATEGORIES -->
 
 <div class="container my-5">
-<div class="row g-4">
+<div class="row g-4" id="categories">
 
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-dark">
 <div class="promo-content">
-<small>Profiter</small>
-<h3>Avec</h3>
-<div class="promo-bgword">AirPods</div>
+<small>Decouvrir</small>
+<h3>Ecouteur</h3>
+<div class="promo-bgword">Ecouteur</div>
 <a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/AirPods-Max-5-600x600.png">
@@ -248,9 +275,9 @@
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-yellow">
 <div class="promo-content">
-<small>Nouveau</small>
-<h3>Porter</h3>
-<div class="promo-bgword">GADGET</div>
+<small>Decouvrir</small>
+<h3>Montre</h3>
+<div class="promo-bgword">Montre</div>
 <a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/pngegg.png">
@@ -260,9 +287,9 @@
 <div class="col-lg-4">
 <div class="promo-card promo-red">
 <div class="promo-content">
-<small>S'orienter</small>
-<h3>Appareils</h3>
-<div class="promo-bgword">LAPTOP</div>
+<small>Decouvrir</small>
+<h3>Ordinateur portable</h3>
+<div class="promo-bgword">PC</div>
 <a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
 <img class="promo-img" src="IMG/pngegg (2).png">
@@ -272,8 +299,8 @@
 <div class="col-lg-4">
 <div class="promo-card promo-light">
 <div class="promo-content">
-<small>Meilleur</small>
-<h3>Jeux</h3>
+<small>Decouvrir</small>
+<h3>Console  </h3>
 <div class="promo-bgword">CONSOLE</div>
 <a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
@@ -284,7 +311,7 @@
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-green">
 <div class="promo-content">
-<small>Jouer</small>
+<small>Decouvrir</small>
 <h3>Jeux</h3>
 <div class="promo-bgword">CASQUE VR</div>
 <a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
@@ -296,8 +323,8 @@
 <div class="col-lg-4 col-md-6">
 <div class="promo-card promo-blue">
 <div class="promo-content">
-<small>Nouveau</small>
-<h3>Amazon</h3>
+<small>Decouvrir</small>
+<h3>Enceinte</h3>
 <div class="promo-bgword">ENCEINTE</div>
 <a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
 </div>
