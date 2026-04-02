@@ -16,7 +16,10 @@
 
 
 <body>
-
+  <nav>
+    <a href="/acceuil">Accueil</a>
+    <button onclick="deconnexion()">Déconnexion</button>
+  </nav>
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
 <div class="container">
