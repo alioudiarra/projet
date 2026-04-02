@@ -12,6 +12,6 @@ session_destroy();
 header("Location: connexion.php");
 exit();
 ?>
-<a href="logout.php">Se déconnecter</a>
+<a href="deconnexion.php">Se déconnecter</a>
 </body>
 </html>
