@@ -17,8 +17,7 @@
 
 <body>
   <nav>
-    <a href="/acceuil">Accueil</a>
-    <button onclick="deconnexion()">Déconnexion</button>
+
   </nav>
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
@@ -58,19 +57,19 @@
 
         <div class="d-flex align-items-center gap-3">
 
-            <?php if (isset($_SESSION['id_u'])) : ?>
-                <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
-                    <i class="bi bi-person-fill text-danger"></i>
-                    <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
-                </a>
-                <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
-            <?php else : ?>
-                <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
-            <?php endif; ?>
+        <?php if (isset($_SESSION['id_u'])) : ?>
+    <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
+        <i class="bi bi-person-fill text-danger"></i>
+        <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
+    </a>
+    <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
+<?php else : ?>
+    <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
+<?php endif; ?>
 
-            <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-            <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
-        </div>
+<a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
+<a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
+</div>
 
     </div>
 </div>
