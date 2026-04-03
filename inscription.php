@@ -1,7 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_start();
 // CONNEXION À LA BASE "projet" 
 $conn = mysqli_connect("localhost", "root", "root", "projet");
+if (!$conn) {
+    die("Erreur connexion : " . mysqli_connect_error());
+}
 //AJOUT $MESSAGE POUR EVITER LES BUG 
 $message = "";
 
