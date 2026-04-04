@@ -356,3 +356,304 @@
       margin-top: 0;
   }
 }
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT PAGE — Style Rouge & Noir (éléments du formulaire only)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Wrapper principal ── */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px 80px;
+  min-height: calc(100vh - 80px);
+  background-image: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(232, 0, 13, 0.10) 0%, transparent 65%);
+}
+
+/* ── Carte du formulaire ── */
+.form-card {
+  width: 100%;
+  max-width: 620px;
+  background: #111111;
+  border: 1px solid #2A2A2A;
+  border-radius: 20px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6), 0 0 40px rgba(232, 0, 13, 0.12);
+  overflow: hidden;
+  animation: contactSlideUp .5s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes contactSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── En-tête ── */
+.form-header {
+  padding: 40px 44px 32px;
+  background: linear-gradient(135deg, #160003 0%, #1A0005 60%, #0d0d0d 100%);
+  border-bottom: 1px solid #2A2A2A;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Halo décoratif coin haut-droit */
+.form-header::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(232, 0, 13, 0.30) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Trait rouge bas de l'en-tête */
+.form-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, #E8000D 0%, transparent 100%);
+}
+
+/* Badge */
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(232, 0, 13, 0.12);
+  border: 1px solid rgba(232, 0, 13, 0.35);
+  color: #FF1A24;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: .3rem .8rem;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+/* Titre */
+.form-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+/* Sous-titre */
+.form-header p {
+  color: #888888;
+  font-size: .875rem;
+  line-height: 1.6;
+}
+
+/* ── Corps ── */
+.form-body {
+  padding: 36px 44px 40px;
+}
+
+/* ── Labels ── */
+.form-body .form-label {
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: #888888;
+  margin-bottom: 8px;
+}
+
+/* ── Wrapper icône + input ── */
+.input-icon-wrap {
+  position: relative;
+}
+
+.input-icon-wrap > i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666666;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: color .2s;
+  z-index: 2;
+}
+
+.input-icon-wrap:focus-within > i {
+  color: #E8000D;
+}
+
+/* ── Inputs & Select ── */
+.form-body .form-control,
+.form-body .form-select {
+  background: #1A1A1A !important;
+  border: 1px solid #2A2A2A !important;
+  color: #F0F0F0 !important;
+  border-radius: 6px !important;
+  padding: .7rem 1rem !important;
+  font-size: .9rem !important;
+  transition: border-color .2s, box-shadow .2s !important;
+}
+
+/* Décalage pour l'icône */
+.input-icon-wrap .form-control {
+  padding-left: 2.6rem !important;
+}
+
+.form-body .form-control::placeholder {
+  color: #555555 !important;
+}
+
+.form-body .form-control:focus,
+.form-body .form-select:focus {
+  border-color: #E8000D !important;
+  box-shadow: 0 0 0 3px rgba(232, 0, 13, 0.18) !important;
+  outline: none !important;
+  background: #1E1E1E !important;
+}
+
+/* Options du select */
+.form-body .form-select option {
+  background: #1A1A1A;
+  color: #F0F0F0;
+}
+
+/* Textarea */
+.form-body textarea.form-control {
+  resize: vertical;
+  min-height: 130px;
+  padding: .8rem 1rem !important;
+}
+
+/* ── Validation ── */
+.was-validated .form-body .form-control:invalid,
+.was-validated .form-body .form-select:invalid {
+  border-color: #9B0009 !important;
+  box-shadow: 0 0 0 3px rgba(155, 0, 9, 0.2) !important;
+}
+.was-validated .form-body .form-control:valid,
+.was-validated .form-body .form-select:valid {
+  border-color: #2E7D32 !important;
+  box-shadow: none !important;
+}
+
+.form-body .invalid-feedback {
+  color: #FF8A8A !important;
+  font-size: .78rem !important;
+  margin-top: 5px;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #2A2A2A 30%, #2A2A2A 70%, transparent);
+  margin: 1.5rem 0;
+}
+
+/* ── Bouton submit ── */
+.btn-submit {
+  width: 100%;
+  padding: .85rem 1.5rem;
+  background: #E8000D;
+  border: none;
+  border-radius: 6px;
+  color: #FFFFFF;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background .25s, transform .15s, box-shadow .25s;
+}
+
+/* Effet shimmer au hover */
+.btn-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.08) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform .45s ease;
+}
+
+.btn-submit:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-submit:hover {
+  background: #FF1A24;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232, 0, 13, 0.45);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ── Alert succès ── */
+.alert-success-custom {
+  display: none;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(46, 125, 50, 0.12);
+  border: 1px solid rgba(46, 125, 50, 0.4);
+  color: #81C784;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+/* ── Alert erreur ── */
+.alert-error-custom {
+  display: none;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(232, 0, 13, 0.10);
+  border: 1px solid rgba(232, 0, 13, 0.35);
+  color: #FF8A8A;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+/* ── Note confidentialité ── */
+.privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .78rem;
+  color: #666666;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #2A2A2A;
+}
+
+.privacy-note i {
+  color: #9B0009;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .form-header,
+  .form-body {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .form-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .form-wrapper {
+    padding: 32px 12px 60px;
+  }
+}
