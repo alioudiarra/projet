@@ -289,7 +289,7 @@
 }
 
 .card-img-top {
-  height: 220px;
+  height: 320px;
   object-fit: cover;
   background-color: #f3f3f3;
 }
@@ -349,4 +349,10 @@
   background-color: rgba(0,0,0,0.4);
   border-radius: 50%;
   padding: 20px;
+}
+@media (min-width: 992px) {
+  .navbar .dropdown:hover .dropdown-menu {
+      display: block;
+      margin-top: 0;
+  }
 }

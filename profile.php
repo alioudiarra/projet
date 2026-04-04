@@ -2,23 +2,15 @@
 session_start();
 require_once 'database.php';
 
-/*
-|--------------------------------------------------------------------------
-| Vérifier si l'utilisateur est connecté
-|--------------------------------------------------------------------------
-*/
+// Vérifier si l'utilisateur est connecté sinon il le renvoie vers la page de connexion
 if (!isset($_SESSION['id_u'])) {
     header("Location: connexion.php");
     exit();
-}
+} 
 
 $id_u = (int) $_SESSION['id_u'];
 
-/*
-|--------------------------------------------------------------------------
-| Récup utilisateur
-|--------------------------------------------------------------------------
-*/
+// Récup utilisateur
 $sql = "SELECT * FROM users WHERE id_u = ?";
 $stmt = mysqli_prepare($conn, $sql);
 
@@ -36,13 +28,8 @@ if (!$user) {
     die("Utilisateur introuvable.");
 }
 
-/*
-|--------------------------------------------------------------------------
-| Récup annonces
-|--------------------------------------------------------------------------
-*/
+// Récup annonces
 $annonces = [];
-
 $sqlAnnonces = "SELECT * FROM annnonce WHERE id_u = ? ORDER BY id_a DESC";
 $stmtAnnonces = mysqli_prepare($conn, $sqlAnnonces);
 
@@ -62,305 +49,123 @@ if ($stmtAnnonces) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon profil</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
-        <div class="container">
+<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
+    <div class="container">
+        <a class="navbar-brand brand-logo" href="acceil.php"><span>lebon</span>coin</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-3 me-auto gap-lg-3">
+                <li class="nav-item"><a class="nav-link active" href="acceil.php">Accueil</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vente</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
+                        <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
+                        <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
+                        <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <?php if (isset($_SESSION['id_u'])) : ?>
+                    <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
+                        <i class="bi bi-person-fill text-danger"></i>
+                        <span class="fw-semibold small"><?= htmlspecialchars($user['pseudo'] ?? '') ?></span>
+                    </a>
+                    <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
+                <?php else : ?>
+                    <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
+                <?php endif; ?>
+                <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
+            </div>
+        </div>
+    </div>
+</nav>
 
-            <a class="navbar-brand brand-logo" href="#">
-                <span>FOM</span>loic
-            </a>
+<section class="py-5" style="background-color: #f7f7f7; min-height: 100vh;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="text-danger fw-bold text-uppercase mb-2">Mon espace</p>
+            <h1 class="fw-bold display-5 mb-2">Mon profil</h1>
+        </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 h-100 p-4 text-center">
+                    <img src="<?= !empty($user['photo_profil']) ? htmlspecialchars($user['photo_profil']) : 'avatar.jpg' ?>" 
+                         class="rounded-circle mx-auto mb-3" width="110" height="110" style="object-fit: cover; border: 4px solid #f1f1f1;">
+                    <h3 class="fw-bold mb-1"><?= htmlspecialchars($user['nom'] ?? '') ?></h3>
+                    <p class="text-muted mb-4">@<?= htmlspecialchars($user['pseudo'] ?? '') ?></p>
+                    <a href="update-profile.php" class="btn btn-danger w-100 rounded-3 fw-semibold">Modifier profil</a>
+                </div>
+            </div>
 
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-                   <li class="nav-item"><a class="nav-link active" href="#">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Vente</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                </ul>
-
-                <div class="d-flex align-items-center gap-3">
-                    <a class="icon-btn" href="profile.php"><i class="bi bi-person"></i></a>
-                    <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-                    <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <h2 class="fw-bold mb-4">Informations personnelles</h2>
+                    <p class="mb-1 text-muted small">Email</p>
+                    <p class="fw-semibold border-bottom pb-2"><?= htmlspecialchars($user['email'] ?? '') ?></p>
+                    <p class="mb-1 text-muted small">Ville</p>
+                    <p class="fw-semibold"><?= !empty($user['ville']) ? htmlspecialchars($user['ville']) : 'Non renseignée' ?></p>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <!-- PAGE PROFIL -->
-    <section class="py-5" style="background-color: #f7f7f7; min-height: 100vh;">
-        <div class="container">
-
-            <div class="text-center mb-5">
-                <p class="text-danger fw-bold text-uppercase mb-2">Mon espace</p>
-                <h1 class="fw-bold display-5 mb-2">Mon profil</h1>
-                <p class="text-muted">Retrouvez vos informations personnelles et vos produits publiés.</p>
-            </div>
-
-            <div class="row g-4">
-
-                <!-- CARTE PROFIL -->
-                <div class="col-lg-4">
-                    <div class="card border-0 shadow-sm rounded-4 h-100">
-                        <div class="card-body text-center p-4">
-
-                            <img
-                                src="<?= !empty($user['photo_profil']) ? htmlspecialchars($user['photo_profil']) : 'avatar.jpg' ?>"
-                                alt="Photo de profil"
-                                class="rounded-circle mx-auto mb-3"
-                                width="110"
-                                height="110"
-                                style="object-fit: cover; border: 4px solid #f1f1f1;">
-
-                            <h3 class="fw-bold mb-1"><?= htmlspecialchars($user['nom'] ?? '') ?></h3>
-                            <!-- Pseudo dynamique depuis l'inscription -->
-                            <p class="text-muted mb-4">@<?= htmlspecialchars($user['pseudo'] ?? '') ?></p>
-
-                            <a href="update-profile.php" class="btn btn-danger px-4 py-2 rounded-3 fw-semibold mb-4">
-                                Modifier profil
-                            </a>
-
-                            <div class="text-start">
-                                <div class="border-top pt-3">
-                                    <p class="mb-2 text-muted small">Email</p>
-                                    <p class="fw-semibold mb-3"><?= htmlspecialchars($user['email'] ?? '') ?></p>
-                                </div>
-
-                                <div class="border-top pt-3">
-                                    <p class="mb-2 text-muted small">Téléphone</p>
-                                    <p class="fw-semibold mb-3">
-                                        <?= !empty($user['phone']) ? htmlspecialchars($user['phone']) : 'Non renseigné' ?>
-                                    </p>
-                                </div>
-
-                                <div class="border-top pt-3">
-                                    <p class="mb-2 text-muted small">Ville</p>
-                                    <p class="fw-semibold mb-3">
-                                        <?= !empty($user['ville']) ? htmlspecialchars($user['ville']) : 'Non renseignée' ?>
-                                    </p>
-                                </div>
-
-                                <div class="border-top pt-3">
-                                    <p class="mb-2 text-muted small">Membre depuis</p>
-                                    <p class="fw-semibold mb-0">
-                                        <?= !empty($user['created_at']) ? date('Y', strtotime($user['created_at'])) : 'Non renseigné' ?>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- INFOS -->
-                <div class="col-lg-8">
-                    <div class="card border-0 shadow-sm rounded-4 h-100">
-                        <div class="card-body p-4 p-md-5">
-                            <h2 class="fw-bold mb-4">Informations personnelles</h2>
-
-                            <div class="border-bottom pb-3 mb-3">
-                                <p class="text-muted mb-1">Pseudo</p>
-                                <p class="fw-semibold mb-0">@<?= htmlspecialchars($user['pseudo'] ?? '') ?></p>
-                            </div>
-
-                            <div class="border-bottom pb-3 mb-3">
-                                <p class="text-muted mb-1">Nom complet</p>
-                                <p class="fw-semibold mb-0"><?= htmlspecialchars($user['nom'] ?? '') ?></p>
-                            </div>
-
-                            <div class="border-bottom pb-3 mb-3">
-                                <p class="text-muted mb-1">Email</p>
-                                <p class="fw-semibold mb-0"><?= htmlspecialchars($user['email'] ?? '') ?></p>
-                            </div>
-
-                            <div class="border-bottom pb-3 mb-3">
-                                <p class="text-muted mb-1">Téléphone</p>
-                                <p class="fw-semibold mb-0">
-                                    <?= !empty($user['phone']) ? htmlspecialchars($user['phone']) : 'Non renseigné' ?>
-                                </p>
-                            </div>
-
-                            <div class="border-bottom pb-3 mb-3">
-                                <p class="text-muted mb-1">Ville</p>
-                                <p class="fw-semibold mb-0">
-                                    <?= !empty($user['ville']) ? htmlspecialchars($user['ville']) : 'Non renseignée' ?>
-                                </p>
-                            </div>
-
-                            <div>
-                                <p class="text-muted mb-1">Bio</p>
-                                <p class="fw-semibold mb-0">
-                                    <?= !empty($user['bio']) ? nl2br(htmlspecialchars($user['bio'])) : 'Aucune bio pour le moment.' ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MES ANNONCES -->
-            <div class="mt-5">
-                <div class="text-center mb-4">
-                    <h2 class="fw-bold">Mes annonces</h2>
-                </div>
-
-                <?php if (!empty($annonces)) : ?>
-                    <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
-
-                        <div class="carousel-indicators">
-                            <?php foreach ($annonces as $index => $annonce) : ?>
-                                <button 
-                                    type="button"
-                                    data-bs-target="#carouselProduits"
-                                    data-bs-slide-to="<?= $index ?>"
-                                    class="<?= $index === 0 ? 'active' : '' ?>"
-                                    <?= $index === 0 ? 'aria-current="true"' : '' ?>>
-                                </button>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <div class="carousel-inner">
-                            <?php foreach ($annonces as $index => $annonce) : ?>
-                                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                                        <div class="row g-0 align-items-center">
-
-                                            <div class="col-md-6 text-center p-4" style="background-color: #eef3f7;">
-                                                <img 
-                                                    src="<?= !empty($annonce['img']) ? htmlspecialchars($annonce['img']) : 'avatar.jpg' ?>" 
-                                                    alt="<?= htmlspecialchars($annonce['title']) ?>"
-                                                    class="img-fluid"
-                                                    style="max-height: 320px; object-fit: contain;"
-                                                >
+        <div class="mt-5">
+            <h2 class="fw-bold text-center mb-4">Mes annonces</h2>
+            <?php if (!empty($annonces)) : ?>
+                <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php foreach ($annonces as $index => $annonce) : ?>
+                            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-md-6 text-center p-4" style="background-color: #eef3f7;">
+                                            <img src="<?= htmlspecialchars($annonce['img']) ?>" class="img-fluid" style="max-height: 300px;">
+                                        </div>
+                                        <div class="col-md-6 p-4">
+                                            <h3 class="fw-bold"><?= htmlspecialchars($annonce['title']) ?></h3>
+                                            <p class="fw-bold text-danger fs-2"><?= number_format((float)$annonce['price'], 2, ',', ' ') ?> €</p>
+                                            
+                                            <div class="d-flex gap-2">
+                                                <a href="article.php?id=<?= $annonce['id_a'] ?>" class="btn btn-dark px-4 py-2 rounded-3">Voir</a>
+                                                
+                                                <a href="supprimer_annnonce.php?id=<?= $annonce['id_a'] ?>" 
+                                                   class="btn btn-danger px-4 py-2 rounded-3" 
+                                                   onclick="return confirm('Es-tu sûr de vouloir supprimer cette annonce ?');">
+                                                    <i class="bi bi-trash"></i> Supprimer
+                                                </a>
                                             </div>
-
-                                            <div class="col-md-6">
-                                                <div class="card-body p-4 p-md-5">
-
-                                                    <span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-2 mb-3">
-                                                        <?= !empty($annonce['type']) ? htmlspecialchars($annonce['type']) : 'Annonce' ?>
-                                                    </span>
-
-                                                    <h3 class="fw-bold mb-3">
-                                                        <?= htmlspecialchars($annonce['title']) ?>
-                                                    </h3>
-
-                                                    <p class="text-muted mb-3">
-                                                        <?= !empty($annonce['desc']) ? nl2br(htmlspecialchars($annonce['desc'])) : 'Aucune description.' ?>
-                                                    </p>
-
-                                                    <p class="fw-bold text-danger fs-2 mb-2">
-                                                        <?= number_format((float)$annonce['price'], 2, ',', ' ') ?> €
-                                                    </p>
-
-                                                    <?php
-                                                    $statutTexte = 'Inconnu';
-                                                    if ($annonce['status'] == 1) {
-                                                        $statutTexte = 'Disponible';
-                                                    } elseif ($annonce['status'] == 2) {
-                                                        $statutTexte = 'Vendu';
-                                                    } elseif ($annonce['status'] == 3) {
-                                                        $statutTexte = 'Réservé';
-                                                    }
-                                                    ?>
-
-                                                    <p class="mb-4">
-                                                        <span class="badge bg-dark">
-                                                            Statut : <?= $statutTexte ?>
-                                                        </span>
-                                                    </p>
-
-                                                    <a href="#" class="btn btn-danger px-4 py-2 rounded-3 fw-semibold">
-                                                        Voir l'annonce
-                                                    </a>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <?php if (count($annonces) > 1) : ?>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduits" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                                <span class="visually-hidden">Précédent</span>
-                            </button>
-
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselProduits" data-bs-slide="next">
-                                <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                                <span class="visually-hidden">Suivant</span>
-                            </button>
-                        <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php else : ?>
-                    <div class="card border-0 shadow-sm rounded-4">
-                        <div class="card-body p-5 text-center">
-                            <h3 class="fw-bold mb-3">Aucune annonce</h3>
-                            <p class="text-muted mb-0">
-                                Tu n'as pas encore ajouté d'annonce.
-                            </p>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            </div>
-
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduits" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselProduits" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                    </button>
+                </div>
+            <?php else : ?>
+                <p class="text-center text-muted">Aucune annonce publiée.</p>
+            <?php endif; ?>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer class="mt-5 text-white" style="background: linear-gradient(90deg, #1b2028, #1f2630);">
-        <div class="container py-5">
-            <div class="row g-4">
-                <div class="col-md-3">
-                    <h3 class="fw-bold mb-3"><span class="text-danger">PH</span>LOX</h3>
-                    <p class="mb-0">Votre boutique en ligne pour les derniers produits tech : smartphones, accessoires, gaming et plus encore.</p>
-                </div>
-                <div class="col-md-3">
-                    <h4 class="fw-bold mb-3">PRODUITS</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">Telephones</li>
-                        <li class="mb-2">Casques</li>
-                        <li class="mb-2">jeux</li>
-                        <li class="mb-2">Accessoires</li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4 class="fw-bold mb-3">LIENS UTILES</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">Votre compte</li>
-                        <li class="mb-2">Commandes</li>
-                        <li class="mb-2">Aide</li>
-                        <li class="mb-2">Contact</li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4 class="fw-bold mb-3">CONTACT</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">Paris, France</li>
-                        <li class="mb-2">contact@phlox.com</li>
-                        <li class="mb-2">+33 6 00 00 00 00</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-top mt-4 pt-4 border-secondary">
-                <p class="mb-0">© 2026 Copyright : PHLOX</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html> 

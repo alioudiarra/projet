@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();//pour rester connecter a chaque fois 
 // CONNEXION À LA BASE "projet" 
 $conn = mysqli_connect("localhost", "root", "root", "projet");
 //AJOUT $MESSAGE POUR EVITER LES BUG 
@@ -12,19 +12,18 @@ if (isset($_POST['register'])) {
     $nom    = mysqli_real_escape_string($conn, $_POST['nom']);
     $email  = mysqli_real_escape_string($conn, $_POST['email']);
     $phone  = mysqli_real_escape_string($conn, $_POST['phone']);
-    //AJOUT DE LA VILLE 
     $ville  = mysqli_real_escape_string($conn, $_POST['ville']);
     $perm   = 1;
 
     $mpd_clair = $_POST['mpd'];
-    $mpd_hache = password_hash($mpd_clair, PASSWORD_BCRYPT);
+    $mpd_hache = password_hash($mpd_clair, PASSWORD_BCRYPT);//hachage
 
     // Vérifier si l'email existe déjà
     $check_email = mysqli_query($conn, "SELECT id_u FROM users WHERE email = '$email'");
 
     if (mysqli_num_rows($check_email) == 0) {
         $sql = "INSERT INTO users (pseudo, nom, email, mpd, phone, ville, perm) 
-                VALUES ('$pseudo', '$nom', '$email', '$mpd_hache', '$phone', '$ville', '$perm')";
+                VALUES ('$pseudo', '$nom', '$email', '$mpd_hache', '$phone', '$ville', '$perm')";//valeurs des variables 
 
         if (mysqli_query($conn, $sql)) {
             $id_u = mysqli_insert_id($conn);

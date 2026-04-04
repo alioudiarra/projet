@@ -1,481 +1,191 @@
+<?php
+// 1. CONNEXION ET SESSION
+session_start();
+require_once 'database.php'; 
+
+// 2. RÉCUPÉRATION DES PRODUITS POPULAIRES (LES 6 PREMIERS)
+$sqlPop = "SELECT * FROM annnonce LIMIT 6"; 
+$resultPop = mysqli_query($conn, $sqlPop);
+
+// 3. RÉCUPÉRATION DES ANNONCES VENDEURS (SAUF LES 6 PREMIERS)
+// On utilise OFFSET 6 pour sauter les produits déjà affichés en haut
+$sqlVendeurs = "SELECT * FROM annnonce ORDER BY id_a DESC LIMIT 100 OFFSET 6";
+$resultVendeurs = mysqli_query($conn, $sqlVendeurs);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>LEBONCOIN GRP 4</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEBONCOIN GRP 4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
-<div class="container">
-
-<a class="navbar-brand brand-logo" href="#">
-<span>lebon</span>coin
-</a>
-
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-<span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse" id="mainNav">
-
-<ul class="navbar-nav ms-3 me-auto gap-lg-3">
-<li class="nav-item"><a class="nav-link active" href="#">Accueil</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Vente</a></li>
-<li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-</ul>
-
-<div class="d-flex align-items-center gap-3">
-<a class="nav-link p-0" href="#">Se connecter</a>
-<a class="nav-link p-0" href="inscription.php">S'inscrire</a>
-<a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-<a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
-</div>
-
-</div>
-</div>
+    <div class="container">
+        <a class="navbar-brand brand-logo" href="accueil.php"><span>lebon</span>coin</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-3 me-auto gap-lg-3">
+                <li class="nav-item"><a class="nav-link active" href="accueil.php">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Vente</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <a class="nav-link p-0" href="favoris.php">Mes favoris</a>
+                <a class="nav-link p-0" href="#">Se connecter</a>
+                <a class="nav-link p-0" href="inscription.php">S'inscrire</a>
+                <a class="nav-link p-0" href="profile.php" style="color:red; font-weight:bold;">Mon Profil</a>
+                <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
+            </div>
+        </div>
+    </div>
 </nav>
 
-
-<!-- HERO CAROUSEL -->
-
 <div id="heroCarousel" class="carousel slide container mt-5" data-bs-ride="carousel">
-
-<div class="carousel-indicators">
-<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
-<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4"></button>
-<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="5"></button>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="card border-0 shadow-lg p-4">
+                <div class="row flex-lg-row-reverse align-items-center g-5">
+                    <div class="col-lg-6"><img src="IMG/d4bbced5-3174-492f-b45d-f3fb22565a02-1_c7854bef-96b0-48f2-acd4-72d8ee183e25.avif" class="img-fluid"></div>
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold mb-3">Design & Technologie</h1>
+                        <p class="lead">Découvrez le smartphone nouvelle génération.</p>
+                        <button class="btn btn-danger btn-lg">Achetez maintenant</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="carousel-inner">
-
-
-<!-- Slide 1 -->
-<div class="carousel-item active">
-<div class="card border-0 shadow-lg p-4">
-<div class="row flex-lg-row-reverse align-items-center g-5">
-
-<div class="col-lg-6">
-<img src="IMG/d4bbced5-3174-492f-b45d-f3fb22565a02-1_c7854bef-96b0-48f2-acd4-72d8ee183e25.avif" class="img-fluid">
-</div>
-
-<div class="col-lg-6">
-<h1 class="display-5 fw-bold mb-3">Un design élégant. Une technologie puissante.</h1>
-<p class="lead">Découvrez le smartphone nouvelle génération.</p>
-
-<div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Achetez maintenant</button>
-<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- Slide 2 -->
-<div class="carousel-item">
-<div class="card border-0 shadow-lg p-4">
-<div class="row flex-lg-row-reverse align-items-center g-5">
-
-<div class="col-lg-6">
-<img src="IMG/AirPods-Max-5-600x600.png" class="img-fluid">
-</div>
-
-<div class="col-lg-6">
-<h1 class="display-5 fw-bold mb-3">Un son immersif.</h1>
-<p class="lead">Découvrez nos écouteurs nouvelle génération.</p>
-
-<div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Achetez maintenant</button>
-<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- Slide 3 -->
-<div class="carousel-item">
-<div class="card border-0 shadow-lg p-4">
-<div class="row flex-lg-row-reverse align-items-center g-5">
-
-<div class="col-lg-6">
-<img src="IMG/pngegg.png" class="img-fluid">
-</div>
-
-<div class="col-lg-6">
-<h1 class="display-5 fw-bold mb-3">Une montre connectée intelligente.</h1>
-<p class="lead">Suivez votre santé et vos activités.</p>
-
-<div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Achetez maintenant</button>
-<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- Slide 4 -->
-<div class="carousel-item">
-<div class="card border-0 shadow-lg p-4">
-<div class="row flex-lg-row-reverse align-items-center g-5">
-
-<div class="col-lg-6">
-<img src="IMG/pngegg (2).png" class="img-fluid">
-</div>
-
-<div class="col-lg-6">
-<h1 class="display-5 fw-bold mb-3">Performance et puissance.</h1>
-<p class="lead">Découvrez nos laptops nouvelle génération.</p>
-
-<div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Achetez maintenant</button>
-<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- Slide 5 -->
-<div class="carousel-item">
-<div class="card border-0 shadow-lg p-4">
-<div class="row flex-lg-row-reverse align-items-center g-5">
-
-<div class="col-lg-6">
-<img src="IMG/ps5-console-png-ywbv2gv3gfw23o3w.png" class="img-fluid">
-</div>
-
-<div class="col-lg-6">
-<h1 class="display-5 fw-bold mb-3">Jouez sans limites.</h1>
-<p class="lead">La console nouvelle génération.</p>
-
-<div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Achetez maintenant</button>
-<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
-
-
-<!-- Slide 6 -->
-<div class="carousel-item">
-<div class="card border-0 shadow-lg p-4">
-<div class="row flex-lg-row-reverse align-items-center g-5">
-
-<div class="col-lg-6">
-<img src="IMG/pngegg (4).png" class="img-fluid">
-</div>
-
-<div class="col-lg-6">
-<h1 class="display-5 fw-bold mb-3">Un son puissant.</h1>
-<p class="lead">Une enceinte connectée intelligente.</p>
-
-<div class="d-flex gap-3">
-<button class="btn btn-danger btn-lg">Achetez maintenant</button>
-<button class="btn btn-outline-secondary btn-lg">En savoir plus</button>
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
-
-</div>
-
-
-<button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-<span class="carousel-control-prev-icon"></span>
-</button>
-
-<button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-<span class="carousel-control-next-icon"></span>
-</button>
-
-</div>
-
-
-
-<!-- SECTION CATEGORIES -->
 
 <div class="container my-5">
-<div class="row g-4">
-
-<div class="col-lg-4 col-md-6">
-<div class="promo-card promo-dark">
-<div class="promo-content">
-<small>Profiter</small>
-<h3>Avec</h3>
-<div class="promo-bgword">AirPods</div>
-<a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a>
-</div>
-<img class="promo-img" src="IMG/AirPods-Max-5-600x600.png">
-</div>
-</div>
-
-<div class="col-lg-4 col-md-6">
-<div class="promo-card promo-yellow">
-<div class="promo-content">
-<small>Nouveau</small>
-<h3>Porter</h3>
-<div class="promo-bgword">GADGET</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
-</div>
-<img class="promo-img" src="IMG/pngegg.png">
-</div>
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+            <div class="promo-card promo-dark">
+                <div class="promo-content"><small>Profiter</small><h3>Avec</h3><div class="promo-bgword">AirPods</div><a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a></div>
+                <img class="promo-img" src="IMG/AirPods-Max-5-600x600.png">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="promo-card promo-yellow">
+                <div class="promo-content"><small>Nouveau</small><h3>Porter</h3><div class="promo-bgword">GADGET</div><a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a></div>
+                <img class="promo-img" src="IMG/pngegg.png">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="promo-card promo-red">
+                <div class="promo-content"><small>S'orienter</small><h3>Appareils</h3><div class="promo-bgword">LAPTOP</div><a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a></div>
+                <img class="promo-img" src="IMG/pngegg (2).png">
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="col-lg-4">
-<div class="promo-card promo-red">
-<div class="promo-content">
-<small>S'orienter</small>
-<h3>Appareils</h3>
-<div class="promo-bgword">LAPTOP</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
-</div>
-<img class="promo-img" src="IMG/pngegg (2).png">
-</div>
-</div>
-
-<div class="col-lg-4">
-<div class="promo-card promo-light">
-<div class="promo-content">
-<small>Meilleur</small>
-<h3>Jeux</h3>
-<div class="promo-bgword">CONSOLE</div>
-<a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a>
-</div>
-<img class="promo-img" src="IMG/ps5-console-png-ywbv2gv3gfw23o3w.png">
-</div>
-</div>
-
-<div class="col-lg-4 col-md-6">
-<div class="promo-card promo-green">
-<div class="promo-content">
-<small>Jouer</small>
-<h3>Jeux</h3>
-<div class="promo-bgword">CASQUE VR</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
-</div>
-<img class="promo-img" src="IMG/pngegg (3).png">
-</div>
-</div>
-
-<div class="col-lg-4 col-md-6">
-<div class="promo-card promo-blue">
-<div class="promo-content">
-<small>Nouveau</small>
-<h3>Amazon</h3>
-<div class="promo-bgword">ENCEINTE</div>
-<a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a>
-</div>
-<img class="promo-img" src="IMG/pngegg (4).png">
-</div>
-</div>
-
-</div>
-</div>
 <section class="container my-5">
-
-<h2 class="text-center mb-5 fw-bold">Produits populaires</h2>
-
-<div class="row g-4">
-
-<!-- produit 1 -->
-<div class="col-lg-3 col-md-6">
-<div class="card h-100 shadow-sm">
-
-<img src="IMG/d4bbced5-3174-492f-b45d-f3fb22565a02-1_c7854bef-96b0-48f2-acd4-72d8ee183e25.avif" class="card-img-top p-3">
-
-<div class="card-body text-center">
-<h5 class="card-title">Smartphone Pro</h5>
-<p class="text-danger fw-bold fs-5">899€</p>
-<button class="btn btn-danger w-100">Ajouter au panier</button>
-</div>
-
-</div>
-</div>
-
-
-<!-- produit 2 -->
-<div class="col-lg-3 col-md-6">
-<div class="card h-100 shadow-sm">
-
-<img src="IMG/AirPods-Max-5-600x600.png" class="card-img-top p-3">
-
-<div class="card-body text-center">
-<h5 class="card-title">AirPods Max</h5>
-<p class="text-danger fw-bold fs-5">549€</p>
-<button class="btn btn-danger w-100">Ajouter au panier</button>
-</div>
-
-</div>
-</div>
-
-
-<!-- produit 3 -->
-<div class="col-lg-3 col-md-6">
-<div class="card h-100 shadow-sm">
-
-<img src="IMG/pngegg (2).png" class="card-img-top p-3">
-
-<div class="card-body text-center">
-<h5 class="card-title">Laptop Pro</h5>
-<p class="text-danger fw-bold fs-5">1299€</p>
-<button class="btn btn-danger w-100">Ajouter au panier</button>
-</div>
-
-</div>
-</div>
-
-
-<!-- produit 4 -->
-<div class="col-lg-3 col-md-6">
-<div class="card h-100 shadow-sm">
-
-<img src="IMG/ps5-console-png-ywbv2gv3gfw23o3w.png" class="card-img-top p-3">
-
-<div class="card-body text-center">
-<h5 class="card-title">PlayStation 5</h5>
-<p class="text-danger fw-bold fs-5">499€</p>
-<button class="btn btn-danger w-100">Ajouter au panier</button>
-</div>
-
-</div>
-</div>
-
-</div>
-
+    <h2 class="text-center mb-5 fw-bold">Produits populaires</h2>
+    <div class="row g-4">
+        <?php while ($pop = mysqli_fetch_assoc($resultPop)) {
+            $isLikedPop = false;
+            if (isset($_SESSION['id_u'])) {
+                $check = mysqli_prepare($conn, "SELECT * FROM `like` WHERE id_u = ? AND id_a = ?");
+                mysqli_stmt_bind_param($check, "ii", $_SESSION['id_u'], $pop['id_a']);
+                mysqli_stmt_execute($check);
+                if (mysqli_num_rows(mysqli_stmt_get_result($check)) > 0) $isLikedPop = true;
+            }
+        ?>
+        <div class="col-lg-4 col-md-6"> 
+            <div class="card h-100 shadow-sm border-0 position-relative">
+                <div class="position-absolute top-0 end-0 p-3" style="z-index: 10;">
+                    <a href="ajouter_favoris.php?id_a=<?php echo $pop['id_a']; ?>">
+                        <i class="bi <?php echo $isLikedPop ? 'bi-heart-fill' : 'bi-heart'; ?> text-danger fs-4"></i>
+                    </a>
+                </div>
+                <img src="<?php echo $pop['img']; ?>" class="card-img-top p-3" style="height: 200px; object-fit: contain;">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold"><?php echo htmlspecialchars($pop['title']); ?></h5>
+                    <p class="text-danger fw-bold fs-5"><?php echo number_format($pop['price'], 0, ',', ' '); ?>€</p>
+                    <button class="btn btn-danger w-100 rounded-pill">Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
+    </div>
 </section>
+
+<section class="container my-5">
+    <h2 class="text-center mb-5 fw-bold" style="color: #2c3e50;">Dernières annonces de nos vendeurs</h2>
+    <div class="row g-4">
+       <?php if (mysqli_num_rows($resultVendeurs) > 0) {
+            while ($row = mysqli_fetch_assoc($resultVendeurs)) {
+                $isLiked = false;
+                if (isset($_SESSION['id_u'])) {
+                    $checkLike = mysqli_prepare($conn, "SELECT * FROM `like` WHERE id_u = ? AND id_a = ?");
+                    mysqli_stmt_bind_param($checkLike, "ii", $_SESSION['id_u'], $row['id_a']);
+                    mysqli_stmt_execute($checkLike);
+                    if (mysqli_num_rows(mysqli_stmt_get_result($checkLike)) > 0) $isLiked = true;
+                } 
+        ?>  
+        <div class="col-lg-3 col-md-6 mb-4"> 
+            <div class="card h-100 shadow-sm border-0 position-relative">
+                <div class="position-absolute top-0 end-0 p-3" style="z-index: 10;"> 
+                    <a href="ajouter_favoris.php?id_a=<?php echo $row['id_a']; ?>">
+                        <i class="bi <?php echo $isLiked ? 'bi-heart-fill' : 'bi-heart'; ?> text-danger fs-4"></i>
+                    </a>
+                </div>
+                <div style="height: 180px; display: flex; align-items: center; justify-content: center;">
+                    <img src="<?php echo $row['img']; ?>" class="card-img-top p-2" style="max-height: 100%; width: auto; object-fit: contain;">
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold"><?php echo htmlspecialchars($row['title']); ?></h5>
+                    <p class="text-muted small"><?php echo htmlspecialchars($row['type']); ?></p>
+                    <p class="text-danger fw-bold fs-5"><?php echo number_format($row['price'], 0, ',', ' '); ?>€</p>
+                    <a href="article.php?id=<?php echo $row['id_a']; ?>" class="btn btn-outline-danger w-100 rounded-pill">Voir l'annonce</a>
+                </div>
+            </div>
+        </div>
+        <?php } } else { echo "<p class='text-center text-muted w-100'>Aucune autre annonce.</p>"; } ?>
+    </div>
+</section>
+
 <footer class="bg-dark text-light pt-5 pb-4">
-
-<div class="container text-md-left">
-
-<div class="row text-md-left">
-
-<!-- Logo -->
-<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-<h5 class="text-uppercase fw-bold mb-4">
-<span style="color:red;">PH</span>LOX
-</h5>
-
-<p>
-Votre boutique en ligne pour les derniers produits tech :
-smartphones, accessoires, gaming et plus encore.
-</p>
-</div>
-
-<!-- Liens -->
-<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-<h5 class="text-uppercase fw-bold mb-4">
-Produits
-</h5>
-
-<p><a href="#" class="text-light text-decoration-none">Téléphones</a></p>
-<p><a href="#" class="text-light text-decoration-none">Casques</a></p>
-<p><a href="#" class="text-light text-decoration-none">Jeux</a></p>
-<p><a href="#" class="text-light text-decoration-none">Accessoires</a></p>
-</div>
-
-<!-- Liens utiles -->
-<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-<h5 class="text-uppercase fw-bold mb-4">
-Liens utiles
-</h5>
-
-<p><a href="#" class="text-light text-decoration-none">Votre compte</a></p>
-<p><a href="#" class="text-light text-decoration-none">Commandes</a></p>
-<p><a href="#" class="text-light text-decoration-none">Aide</a></p>
-<p><a href="#" class="text-light text-decoration-none">Contact</a></p>
-</div>
-
-<!-- Contact -->
-<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-<h5 class="text-uppercase fw-bold mb-4">
-Contact
-</h5>
-
-<p><i class="bi bi-house"></i> Paris, France</p>
-<p><i class="bi bi-envelope"></i> contact@phlox.com</p>
-<p><i class="bi bi-phone"></i> +33 6 00 00 00 00</p>
-</div>
-
-</div>
-
-<hr class="mb-4">
-
-<!-- réseaux -->
-<div class="row align-items-center">
-
-<div class="col-md-7 col-lg-8">
-
-<p>
-© 2026 Copyright :
-<strong>PHLOX</strong>
-</p>
-
-</div>
-
-<div class="col-md-5 col-lg-4 text-md-end">
-
-<a href="#" class="text-light me-4">
-<i class="bi bi-facebook"></i>
-</a>
-
-<a href="#" class="text-light me-4">
-<i class="bi bi-instagram"></i>
-</a>
-
-<a href="#" class="text-light me-4">
-<i class="bi bi-twitter-x"></i>
-</a>
-
-<a href="#" class="text-light">
-<i class="bi bi-youtube"></i>
-</a>
-
-</div>
-
-</div>
-
-</div>
-
+    <div class="container text-md-left">
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <h5 class="text-uppercase fw-bold mb-4"><span style="color:red;">lebon</span>coin</h5>
+                <p>Votre boutique tech en ligne.</p>
+            </div>
+            <div class="col-md-2 mt-3">
+                <h5 class="text-uppercase fw-bold mb-4">Produits</h5>
+                <p><a href="#" class="text-light text-decoration-none">Téléphones</a></p>
+                <p><a href="#" class="text-light text-decoration-none">Casques</a></p>
+            </div>
+            <div class="col-md-4 mt-3">
+                <h5 class="text-uppercase fw-bold mb-4">Contact</h5>
+                <p><i class="bi bi-house"></i> Paris, France</p>
+                <p><i class="bi bi-envelope"></i> contact@leboncoin.com</p>
+            </div>
+        </div>
+        <hr class="mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <p>© 2026 Copyright : <strong>LEBONCOIN</strong></p>
+            </div>
+            <div class="col-md-5 text-md-end">
+                <a href="#" class="text-light me-4"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-light me-4"><i class="bi bi-instagram"></i></a>
+            </div>
+        </div>
+    </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-</html>
+</html> 
