@@ -283,11 +283,13 @@ Vous n'avez pas encore de favoris.
 
 </body>
 </html>
-
-<!-- HERO CAROUSEL -->
-
-
 <div id="heroCarousel" class="carousel slide container mt-5" data-bs-ride="carousel">
+    
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    </div>
+
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="card border-0 shadow-lg p-4">
@@ -301,30 +303,29 @@ Vous n'avez pas encore de favoris.
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="container my-5">
-    <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
-            <div class="promo-card promo-dark">
-                <div class="promo-content"><small>Profiter</small><h3>Avec</h3><div class="promo-bgword">AirPods</div><a class="btn btn-danger btn-sm rounded-pill px-4 mt-3">Parcourir</a></div>
-                <img class="promo-img" src="IMG/AirPods-Max-5-600x600.png">
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="promo-card promo-yellow">
-                <div class="promo-content"><small>Nouveau</small><h3>Porter</h3><div class="promo-bgword">GADGET</div><a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a></div>
-                <img class="promo-img" src="IMG/pngegg.png">
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="promo-card promo-red">
-                <div class="promo-content"><small>S'orienter</small><h3>Appareils</h3><div class="promo-bgword">LAPTOP</div><a class="btn btn-light btn-sm rounded-pill px-4 mt-3">Parcourir</a></div>
-                <img class="promo-img" src="IMG/pngegg (2).png">
+        <div class="carousel-item">
+            <div class="card border-0 shadow-lg p-4">
+                <div class="row flex-lg-row-reverse align-items-center g-5">
+                    <div class="col-lg-6"><img src="IMG/AirPods-Max-5-600x600.png" class="img-fluid"></div>
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold mb-3">Audio Premium</h1>
+                        <p class="lead">Le meilleur du son pour vos oreilles.</p>
+                        <button class="btn btn-danger btn-lg">Découvrir</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
+        <span class="visually-hidden">Précédent</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
+        <span class="visually-hidden">Suivant</span>
+    </button>
 </div>
 
     <h2 class="text-center mb-5 fw-bold">Produits populaires</h2>
