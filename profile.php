@@ -2,7 +2,13 @@
 session_start();
 require_once 'database.php';
 
+<<<<<<< HEAD
 // Vérifier si l'utilisateur est connecté sinon il le renvoie vers la page de connexion
+=======
+
+ //Vérifier si l'utilisateur est connecté
+
+>>>>>>> 2502880da73206ff05323aeae04a06df0ae3a893
 if (!isset($_SESSION['id_u'])) {
     header("Location: connexion.php");
     exit();
@@ -10,7 +16,14 @@ if (!isset($_SESSION['id_u'])) {
 
 $id_u = (int) $_SESSION['id_u'];
 
+<<<<<<< HEAD
 // Récup utilisateur
+=======
+
+
+// Récup utilisateur
+
+>>>>>>> 2502880da73206ff05323aeae04a06df0ae3a893
 $sql = "SELECT * FROM users WHERE id_u = ?";
 $stmt = mysqli_prepare($conn, $sql);
 
@@ -28,7 +41,15 @@ if (!$user) {
     die("Utilisateur introuvable.");
 }
 
+<<<<<<< HEAD
 // Récup annonces
+=======
+
+
+// Récup annonces
+
+
+>>>>>>> 2502880da73206ff05323aeae04a06df0ae3a893
 $annonces = [];
 $sqlAnnonces = "SELECT * FROM annnonce WHERE id_u = ? ORDER BY id_a DESC";
 $stmtAnnonces = mysqli_prepare($conn, $sqlAnnonces);
@@ -55,6 +76,7 @@ if ($stmtAnnonces) {
 </head>
 <body>
 
+<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
     <div class="container">
         <a class="navbar-brand brand-logo" href="acceil.php"><span>lebon</span>coin</a>
@@ -120,6 +142,66 @@ if ($stmtAnnonces) {
                 </div>
             </div>
         </div>
+=======
+   
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
+<div class="container">
+
+    <a class="navbar-brand brand-logo" href="#">
+        <span>lebon</span>coin
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+
+        <ul class="navbar-nav ms-3 me-auto gap-lg-3">
+            <li class="nav-item"><a class="nav-link active" href="acceil.php">Accueil</a></li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Vente
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
+                    <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
+                    <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
+                    <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger fw-bold" href="#categories">Voir tout</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3">
+
+            <?php if (isset($_SESSION['id_u'])) : ?>
+                <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
+                    <i class="bi bi-person-fill text-danger"></i>
+                    <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
+                </a>
+                <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
+            <?php else : ?>
+                <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
+            <?php endif; ?>
+
+            <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
+            <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
+        </div>
+
+    </div>
+</div>
+</nav>
+
+>>>>>>> 2502880da73206ff05323aeae04a06df0ae3a893
 
         <div class="mt-5">
             <h2 class="fw-bold text-center mb-4">Mes annonces</h2>

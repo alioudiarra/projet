@@ -1,7 +1,16 @@
 <?php
+<<<<<<< HEAD
 session_start();//pour rester connecter a chaque fois 
+=======
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+session_start();
+>>>>>>> 2502880da73206ff05323aeae04a06df0ae3a893
 // CONNEXION À LA BASE "projet" 
 $conn = mysqli_connect("localhost", "root", "root", "projet");
+if (!$conn) {
+    die("Erreur connexion : " . mysqli_connect_error());
+}
 //AJOUT $MESSAGE POUR EVITER LES BUG 
 $message = "";
 
