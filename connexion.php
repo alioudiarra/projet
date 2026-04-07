@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+require_once 'config.php'; // session_start() est déjà dans config.php
 
 $db = mysqli_connect("localhost", "root", "root", "projet");
 
@@ -22,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['mpd'])) {
             $_SESSION['id_u']   = $user['id_u'];
             $_SESSION['pseudo'] = $user['pseudo'];
-            header("Location: profile.php");
+            $_SESSION['perm']   = $user['perm']; // ← enregistre la permission en session
+            header("Location: acceil.php");
             exit();
         } else {
             $erreur = "Pseudo ou mot de passe incorrect.";
@@ -75,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="mb-3">
         <label class="form-label">Pseudo</label>
-        <input type="text" class="form-control" name="pseudo" value="<?= htmlspecialchars($_POST['pseudo'] ?? '') ?>">
+        <input type="text" class="form-control" name="pseudo"
+               value="<?= htmlspecialchars($_POST['pseudo'] ?? '') ?>">
     </div>
     <div class="mb-3">
         <label class="form-label">Password</label>
