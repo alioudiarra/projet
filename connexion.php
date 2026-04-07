@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <li class="nav-item"><a class="nav-link" href="users.php">Users</a></li>
         <li class="nav-item"><a class="nav-link" href="chat.php">Chat</a></li>
       </ul>
-      <a class="btn btn-danger" href="register.php">
+      <a class="btn btn-danger" href="inscription.php">
         Register <i class="fa-solid fa-person"></i>
       </a>
     </div>

@@ -1,5 +1,8 @@
 
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once 'config.php';
 ?>
 
@@ -81,8 +84,7 @@ require_once 'config.php';
     </div>
   </div>
 </nav>
-<<<<<<< HEAD
-=======
+
 <div class="form-wrapper">
     <div class="form-card">
 
@@ -218,6 +220,6 @@ require_once 'config.php';
 
 </body>
 </html>
->>>>>>> 2502880da73206ff05323aeae04a06df0ae3a893
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
