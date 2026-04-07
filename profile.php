@@ -2,15 +2,15 @@
 require_once 'config.php';
 require_once 'database.php';
 
-<<<<<<< HEAD
+
 // Sécurité : Vérifier si l'utilisateur est connecté
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-=======
+
 // Vérifier si l'utilisateur est connecté sinon il le renvoie vers la page de connexion
->>>>>>> 1d755ff12d490a5888c3bd6c0c56b021dea72410
+
 if (!isset($_SESSION['id_u'])) {
     header("Location: connexion.php");
     exit();
@@ -18,11 +18,11 @@ if (!isset($_SESSION['id_u'])) {
 
 $id_u = (int) $_SESSION['id_u'];
 
-<<<<<<< HEAD
+
 // 1. Récupération des informations de l'utilisateur
-=======
+
 // Récup utilisateur
->>>>>>> 1d755ff12d490a5888c3bd6c0c56b021dea72410
+
 $sql = "SELECT * FROM users WHERE id_u = ?";
 $stmt = mysqli_prepare($conn, $sql);
 
@@ -39,11 +39,10 @@ if (!$user) {
     die("Utilisateur introuvable.");
 }
 
-<<<<<<< HEAD
 // 2. Récupération des annonces de l'utilisateur
-=======
+
 // Récup annonces
->>>>>>> 1d755ff12d490a5888c3bd6c0c56b021dea72410
+
 $annonces = [];
 $sqlAnnonces = "SELECT * FROM annnonce WHERE id_u = ? ORDER BY id_a DESC";
 $stmtAnnonces = mysqli_prepare($conn, $sqlAnnonces);
@@ -73,10 +72,8 @@ if ($stmtAnnonces) {
 </head>
 <body>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 1d755ff12d490a5888c3bd6c0c56b021dea72410
+
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
 <div class="container">
 

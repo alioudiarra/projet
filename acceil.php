@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 1d755ff12d490a5888c3bd6c0c56b021dea72410
+
+
+
 <?php
 // 1. CONNEXION ET SESSION
 require_once 'config.php'; 
@@ -16,10 +16,9 @@ $resultPop = mysqli_query($conn, $sqlPop);
 $sqlVendeurs = "SELECT * FROM annnonce ORDER BY id_a DESC LIMIT 100 OFFSET 6";
 $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 ?>
-<<<<<<< HEAD
 
-=======
->>>>>>> 1d755ff12d490a5888c3bd6c0c56b021dea72410
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,7 +32,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 
 <body>
 
-<<<<<<< HEAD
+
 
 
 
@@ -287,40 +286,7 @@ Vous n'avez pas encore de favoris.
 
 <!-- HERO CAROUSEL -->
 
-=======
-<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
-    <div class="container">
-        <a class="navbar-brand brand-logo" href="accueil.php"><span>lebon</span>coin</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-                <li class="nav-item"><a class="nav-link active" href="accueil.php">Accueil</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vente</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
-                        <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
-                        <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
-                        <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
-                    </ul>
-                </li>                
-                <li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-            </ul>
-            <div class="d-flex align-items-center gap-3">
-                <a class="nav-link p-0" href="favoris.php">Mes favoris</a>
-                <a class="nav-link p-0" href="#">Se connecter</a>
-                <a class="nav-link p-0" href="inscription.php">S'inscrire</a>
-                <a class="nav-link p-0" href="profile.php" style="color:red; font-weight:bold;">Mon Profil</a>
-                <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-            </div>
-        </div>
-    </div>
-</nav>
 
->>>>>>> 1d755ff12d490a5888c3bd6c0c56b021dea72410
 <div id="heroCarousel" class="carousel slide container mt-5" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
