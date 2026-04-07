@@ -81,8 +81,7 @@ require_once 'config.php';
     </div>
   </div>
 </nav>
-<<<<<<< HEAD
-=======
+
 <div class="form-wrapper">
     <div class="form-card">
 
