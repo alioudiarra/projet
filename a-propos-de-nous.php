@@ -51,7 +51,6 @@ require_once 'config.php';
         </li>
 
         <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 
         <!-- Lien Admin visible seulement si perm = 1 -->
