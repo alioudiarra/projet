@@ -49,7 +49,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         <li><a class="dropdown-item text-danger fw-bold" href="#">Voir tout</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
+                <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.html">À propos de nous</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 
                 <?php if (function_exists('isAdmin') && isAdmin()): ?>

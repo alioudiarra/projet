@@ -16,7 +16,7 @@ if (!isset($_SESSION['id_u'])) {
     exit();
 } 
 
-$id_u = (int) $_SESSION['id_u'];
+$id_u = (int) $_SESSION['id_u'];//permet de recuperer l'id de la personne connecter
 
 
 // 1. Récupération des informations de l'utilisateur
@@ -44,7 +44,7 @@ if (!$user) {
 // Récup annonces
 
 $annonces = [];
-$sqlAnnonces = "SELECT * FROM annnonce WHERE id_u = ? ORDER BY id_a DESC";
+$sqlAnnonces = "SELECT * FROM annnonce WHERE id_u = ? ORDER BY id_a DESC"; //recuperer uniquement les annonces creer les annonces creer par l'utilisateur actuel
 $stmtAnnonces = mysqli_prepare($conn, $sqlAnnonces);
 
 if ($stmtAnnonces) {
@@ -242,8 +242,8 @@ Mes favoris
     <?php if (!empty($annonces)) : ?>
         <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
             
-            <div class="carousel-inner">
-                <?php foreach ($annonces as $index => $annonce) : ?>
+            <div class="carousel-inner"> 
+                <?php foreach ($annonces as $index => $annonce) : ?> //parcours la table annonce et cree le carrosel pour chaque annonce 
                     <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
                         <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                             <div class="row g-0 align-items-center">
