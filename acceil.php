@@ -73,7 +73,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 <?php endif; ?>
 
                 <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-                <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
+                <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">Mes favoris</a>
             </div>
         </div>
@@ -142,8 +142,8 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 <div class="card-body text-center">
                     <h5 class="card-title fw-bold"><?= htmlspecialchars($pop['title']); ?></h5>
                     <p class="text-danger fw-bold fs-5"><?= number_format($pop['price'], 0, ',', ' '); ?>€</p>
-                    <button class="btn btn-danger w-100 rounded-pill">Ajouter au panier</button>
-                </div>
+                    <a href="ajouter_panier.php?id_a=<?php echo (int)$pop['id_a']; ?>" class="btn btn-danger w-100 rounded-pill">Ajouter au panier</a>               
+           </div>
             </div>
         </div>
         <?php endwhile; ?>

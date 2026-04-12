@@ -136,7 +136,7 @@ Contact
 
 <div class="d-flex align-items-center gap-3">
 
-<?php if (isset($_SESSION['id_u'])): ?> //rester connecter a chaque sans toute fois se reconnecter
+<?php if (isset($_SESSION['id_u'])): ?> 
 
 <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
 <i class="bi bi-person-fill text-danger"></i>
