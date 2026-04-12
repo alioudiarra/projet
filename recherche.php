@@ -2,11 +2,21 @@
 require_once 'config.php';
 require_once 'database.php';
 
-// Récupérer les annonces de type audio
-$annonces = [];
-$sql = "SELECT * FROM annnonce WHERE type = 'casque' OR type = 'ecouteur' OR type = 'enceinte' ORDER BY id_a DESC";
-$result = mysqli_query($conn, $sql);
+$recherche = $_GET['q'] ?? '';
 
+if (empty($recherche)) {
+    header("Location: acceil.php");
+    exit;
+}
+
+$sql = "SELECT * FROM annnonce WHERE title LIKE ? OR `desc` LIKE ?";
+$stmt = mysqli_prepare($conn, $sql);
+$search = "%" . $recherche . "%";
+mysqli_stmt_bind_param($stmt, "ss", $search, $search);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+$annonces = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $annonces[] = $row;
 }
@@ -17,15 +27,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio & Casques - LEBONCOIN GRP 4</title>
+    <title>Résultats pour "<?= htmlspecialchars($recherche) ?>"</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top shadow-sm bg-white">
     <div class="container">
         <a class="navbar-brand brand-logo" href="acceil.php">
@@ -117,22 +124,39 @@ while ($row = mysqli_fetch_assoc($result)) {
     </div>
 </nav>
 
-<!-- ===== CONTENU AUDIO ===== -->
+<!-- ===== RÉSULTATS ===== -->
 <div class="container py-5">
-    <div class="text-center mb-5">
-        <p class="text-danger fw-bold text-uppercase mb-2">Catégorie</p>
-        <h1 class="fw-bold display-5 mb-2">🎧 Audio & Casques</h1>
-        <p class="text-muted">Casques, écouteurs et enceintes</p>
-    </div>
 
-    <?php if (isset($_GET['success'])): ?>
-        <div class="alert alert-success text-center">Annonce ajoutée avec succès !</div>
-    <?php endif; ?>
+    <div class="text-center mb-5">
+        <p class="text-danger fw-bold text-uppercase mb-2">Recherche</p>
+        <h1 class="fw-bold display-5 mb-2">Résultats pour "<?= htmlspecialchars($recherche) ?>"</h1>
+        <p class="text-muted"><?= count($annonces) ?> annonce(s) trouvée(s)</p>
+    </div>
 
     <div class="row g-4">
         <?php if (!empty($annonces)): ?>
             <?php foreach ($annonces as $annonce): ?>
+
+                <?php
+                    // ✅ Redirection vers la bonne page selon le type
+                    $redirections = [
+                        'console'    => 'console.php',
+                        'manette'    => 'console.php',
+                        'jeux video' => 'console.php',
+                        'ecouteur'   => 'audio.php',
+                        'casque'     => 'audio.php',
+                        'enceinte'   => 'audio.php',
+                    ];
+                    $typeLower = strtolower($annonce['type'] ?? '');
+                    $pageCat = $redirections[$typeLower] ?? 'index.php';
+
+                    $statuts  = [1 => 'Disponible', 2 => 'Vendu', 3 => 'Réservé'];
+                    $couleurs = [1 => 'success', 2 => 'secondary', 3 => 'warning'];
+                    $s = $annonce['status'];
+                ?>
+
                 <div class="col-sm-6 col-lg-4">
+                    <!-- ✅ Clique sur la carte → annonce_detail.php avec l'id -->
                     <a href="annonce_detail.php?id=<?= (int)$annonce['id_a'] ?>" class="text-decoration-none text-dark">
                         <div class="card h-100 shadow-sm border-0 rounded-4">
 
@@ -143,23 +167,23 @@ while ($row = mysqli_fetch_assoc($result)) {
                                      alt="<?= htmlspecialchars($annonce['title']) ?>">
                             <?php else: ?>
                                 <div class="bg-light d-flex align-items-center justify-content-center rounded-top-4" style="height: 220px;">
-                                    <i class="bi bi-headphones text-muted" style="font-size: 3rem;"></i>
+                                    <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
                                 </div>
                             <?php endif; ?>
 
                             <div class="card-body">
-                                <span class="badge bg-danger mb-2"><?= htmlspecialchars($annonce['type']) ?></span>
+                                <!-- Badge catégorie cliquable -->
+                                <a href="<?= $pageCat ?>" 
+                                   class="badge bg-danger mb-2 text-decoration-none"
+                                   onclick="event.stopPropagation()">
+                                    <?= htmlspecialchars($annonce['type']) ?>
+                                </a>
                                 <h5 class="card-title fw-bold"><?= htmlspecialchars($annonce['title']) ?></h5>
                                 <p class="card-text text-muted small"><?= htmlspecialchars($annonce['desc']) ?></p>
                             </div>
 
                             <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center pb-3">
                                 <span class="fw-bold text-danger fs-5"><?= number_format($annonce['price'], 2) ?> €</span>
-                                <?php
-                                    $statuts  = [1 => 'Disponible', 2 => 'Vendu', 3 => 'Réservé'];
-                                    $couleurs = [1 => 'success', 2 => 'secondary', 3 => 'warning'];
-                                    $s = $annonce['status'];
-                                ?>
                                 <span class="badge bg-<?= $couleurs[$s] ?? 'secondary' ?>">
                                     <?= $statuts[$s] ?? 'Inconnu' ?>
                                 </span>
@@ -168,11 +192,13 @@ while ($row = mysqli_fetch_assoc($result)) {
                         </div>
                     </a>
                 </div>
+
             <?php endforeach; ?>
         <?php else: ?>
             <div class="col-12 text-center">
-                <i class="bi bi-headphones text-muted" style="font-size: 3rem;"></i>
-                <p class="text-muted fs-5 mt-3">Aucune annonce audio pour le moment.</p>
+                <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+                <p class="text-muted fs-5 mt-3">Aucune annonce trouvée pour "<?= htmlspecialchars($recherche) ?>"</p>
+                <a href="acceil.php" class="btn btn-danger mt-2">Retour à l'accueil</a>
             </div>
         <?php endif; ?>
     </div>
@@ -181,3 +207,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<?php
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+?>

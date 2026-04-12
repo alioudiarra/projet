@@ -1,7 +1,6 @@
 <?php
             
 require_once 'database.php';
-
 require_once 'config.php';
 
 /*
@@ -133,8 +132,23 @@ if (isset($_POST['add_annonce'])) {
             mysqli_stmt_bind_param($stmtInsertAnnonce, "ssdsssi", $title, $desc, $price, $status, $type, $img, $id_u);
 
             if (mysqli_stmt_execute($stmtInsertAnnonce)) {
-                $message = "Annonce ajoutée avec succès.";
-                $message_type = "success";
+
+                // ✅ Redirection selon le type
+                $redirections = [
+                    'console'    => 'console.php',
+                    'manette'    => 'console.php',
+                    'jeux video' => 'console.php',
+                    'ecouteur'   => 'audio.php',
+                    'casque'     => 'casque.php',
+                    'enceinte'   => 'casque.php',
+                ];
+
+                $typeLower = strtolower($type);
+                $page = $redirections[$typeLower] ?? 'index.php';
+
+                header("Location: " . $page . "?success=1");
+                exit();
+
             } else {
                 $message = "Erreur lors de l'ajout de l'annonce : " . mysqli_stmt_error($stmtInsertAnnonce);
                 $message_type = "danger";
@@ -341,7 +355,15 @@ if ($stmtAnnonces) {
 
                         <div class="mb-3">
                             <label class="form-label">Type</label>
-                            <input type="text" name="type" class="form-control" placeholder="ex: électronique">
+                            <select name="type" class="form-control" required>
+                                <option value="">Choisir un type</option>
+                                <option value="console">Console</option>
+                                <option value="manette">Manette</option>
+                                <option value="jeux video">Jeux vidéo</option>
+                                <option value="ecouteur">Écouteur</option>
+                                <option value="casque">Casque</option>
+                                <option value="enceinte">Enceinte</option>
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -399,7 +421,14 @@ if ($stmtAnnonces) {
 
                                     <div class="mb-2">
                                         <label class="form-label">Type</label>
-                                        <input type="text" name="type" class="form-control" value="<?= htmlspecialchars($annonce['type']) ?>">
+                                        <select name="type" class="form-control">
+                                            <option value="console" <?= $annonce['type'] == 'console' ? 'selected' : '' ?>>Console</option>
+                                            <option value="manette" <?= $annonce['type'] == 'manette' ? 'selected' : '' ?>>Manette</option>
+                                            <option value="jeux video" <?= $annonce['type'] == 'jeux video' ? 'selected' : '' ?>>Jeux vidéo</option>
+                                            <option value="ecouteur" <?= $annonce['type'] == 'ecouteur' ? 'selected' : '' ?>>Écouteur</option>
+                                            <option value="casque" <?= $annonce['type'] == 'casque' ? 'selected' : '' ?>>Casque</option>
+                                            <option value="enceinte" <?= $annonce['type'] == 'enceinte' ? 'selected' : '' ?>>Enceinte</option>
+                                        </select>
                                     </div>
 
                                     <div class="mb-3">

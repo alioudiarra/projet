@@ -24,7 +24,6 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 </head>
 
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top shadow-sm bg-white">
     <div class="container">
         <a class="navbar-brand brand-logo" href="acceil.php">
@@ -37,9 +36,14 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-                <li class="nav-item"><a class="nav-link active" href="acceil.php">Accueil</a></li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="acceil.php">Accueil</a>
+                </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vente</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Vente
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
                         <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
@@ -49,8 +53,14 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         <li><a class="dropdown-item text-danger fw-bold" href="#">Voir tout</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.html">À propos de nous</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="a-propos-de-nous.html">À propos de nous</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Contact</a>
+                </li>
 
                 <?php if (function_exists('isAdmin') && isAdmin()): ?>
                     <li class="nav-item">
@@ -61,21 +71,52 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 <?php endif; ?>
             </ul>
 
+            <!-- 🔍 Barre de recherche ajoutée ici -->
+            <form class="d-flex me-3" method="GET" action="recherche.php">
+                <input 
+                    class="form-control" 
+                    type="search" 
+                    name="q" 
+                    placeholder="Rechercher..."
+                >
+                <button class="btn btn-danger ms-2" type="submit">
+                    OK
+                </button>
+            </form>
+
             <div class="d-flex align-items-center gap-3">
                 <?php if (isset($_SESSION['id_u'])): ?>
                     <a class="icon-btn d-flex align-items-center gap-2 text-decoration-none text-dark" href="profile.php">
                         <i class="bi bi-person-fill text-danger"></i>
-                        <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
+                        <span class="fw-semibold small">
+                            <?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?>
+                        </span>
                     </a>
-                    <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
+
+                    <a class="icon-btn" href="deconnexion.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
                 <?php else: ?>
-                    <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
+                    <a class="icon-btn" href="inscription.php">
+                        <i class="bi bi-person"></i>
+                    </a>
                 <?php endif; ?>
 
+<<<<<<< HEAD
                 <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">Mes favoris</a>
+=======
+                <a class="icon-btn" href="#">
+                    <i class="bi bi-bag"></i>
+                </a>
+
+                <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
+                    Mes favoris
+                </a>
+>>>>>>> ac004b3d6aa9f75551a46f74de3f2445d6edda56
             </div>
+
         </div>
     </div>
 </nav>
