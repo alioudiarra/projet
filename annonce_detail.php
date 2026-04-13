@@ -141,9 +141,7 @@ $s = $annonce['status'];
                    class="btn btn-primary w-100 mb-3 py-3 fs-5">
                     Contacter le vendeur
                 </a>
-                <button class="btn btn-outline-danger w-100 py-3 fs-5">
-                    <i class="bi bi-heart-fill"></i> Ajouter aux favoris
-                </button>
+              
             <?php else: ?>
                 <a href="connexion.php" class="btn btn-primary w-100 mb-3 py-3 fs-5">
                     Connectez-vous pour contacter le vendeur
