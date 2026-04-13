@@ -48,7 +48,7 @@ require_once 'config.php';
             <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
             <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger fw-bold" href="#categories">Voir tout</a></li>
+            
           </ul>
         </li>
 
