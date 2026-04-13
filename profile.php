@@ -124,12 +124,6 @@ if ($stmtAnnonces) {
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-
-                        <li>
-                            <a class="dropdown-item text-danger fw-bold" href="#">
-                                Voir tout
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
