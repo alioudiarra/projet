@@ -74,11 +74,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li>
-                            <a class="dropdown-item text-danger fw-bold" href="#">
-                                Voir tout
-                            </a>
-                        </li>
+                       
                     </ul>
                 </li>
 
@@ -145,9 +141,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
                 <!-- 🛒 Panier -->
-                <a class="icon-btn" href="panier.php">
-                    <i class="bi bi-bag"></i>
-                </a>
+              
 
                 <!-- ❤️ Favoris (UN SEUL maintenant) -->
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
