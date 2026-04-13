@@ -74,7 +74,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                       
+
                     </ul>
                 </li>
 
@@ -141,7 +141,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
                 <!-- 🛒 Panier -->
-              
+
 
                 <!-- ❤️ Favoris (UN SEUL maintenant) -->
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
