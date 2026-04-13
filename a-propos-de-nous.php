@@ -52,10 +52,10 @@ function isAdmin() {
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top shadow-sm bg-white">
     <div class="container">
-        <a class="navbar-brand brand-logo" href="accueil.php">
-            <span>lebon</span>coin
+        <a class="navbar-brand brand-logo" href="acceil.php">
+            <span class="text-danger fw-bold">lebon</span>coin
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -63,45 +63,126 @@ function isAdmin() {
         </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
+
             <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-                <li class="nav-item"><a class="nav-link" href="accueil.php">Accueil</a></li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="acceil.php">Accueil</a>
+                </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vente</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Vente
+                    </a>
+
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="smartphone.php">Smartphones</a></li>
-                        <li><a class="dropdown-item" href="informatique.php">Informatique</a></li>
-                        <li><a class="dropdown-item" href="console.php">Gaming</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger fw-bold" href="#categories">Voir tout</a></li>
+                        <li>
+                            <a class="dropdown-item" href="smartphone.php">
+                                📱 Smartphones et Montre ⌚️
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="informatique.php">
+                                💻 Informatique
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="console.php">
+                                🎮 Gaming
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="casque.php">
+                                🎧 Audio & Casques
+                            </a>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger fw-bold" href="#">
+                                Voir tout
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link active" href="a-propos-de-nous.php">À propos</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 
-                <?php if (isAdmin()): ?>         
+                <li class="nav-item">
+                    <a class="nav-link" href="a-propos-de-nous.php">
+                        À propos de nous
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">
+                        Contact
+                    </a>
+                </li>
+
+                <?php if (function_exists('isAdmin') && isAdmin()): ?>
                     <li class="nav-item">
                         <a class="nav-link text-danger fw-bold" href="admin.php">
                             <i class="bi bi-shield-lock-fill"></i> Admin
                         </a>
                     </li>
-                <?php endif; ?>  
+                <?php endif; ?>
+
             </ul>
 
+            <!-- 🔍 Barre de recherche -->
+            <form class="d-flex me-3" method="GET" action="recherche.php">
+                <input 
+                    class="form-control" 
+                    type="search" 
+                    name="q" 
+                    placeholder="Rechercher..."
+                >
+
+                <button class="btn btn-danger ms-2" type="submit">
+                    OK
+                </button>
+            </form>
+
+            <!-- 👤 Icônes utilisateur -->
             <div class="d-flex align-items-center gap-3">
+
                 <?php if (isset($_SESSION['id_u'])): ?>
-                    <a class="text-decoration-none d-flex align-items-center gap-2" href="profile.php">
+
+                    <a class="icon-btn d-flex align-items-center gap-2 text-decoration-none text-dark" href="profile.php">
                         <i class="bi bi-person-fill text-danger"></i>
-                        <span class="fw-semibold small text-dark">
-                            <?= htmlspecialchars($_SESSION['pseudo'] ?? 'Mon Profil') ?>
+
+                        <span class="fw-semibold small">
+                            <?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?>
                         </span>
                     </a>
-                    <a class="btn btn-outline-secondary btn-sm" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
+
+                    <a class="icon-btn" href="deconnexion.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
+
                 <?php else: ?>
-                    <a class="btn btn-outline-danger btn-sm" href="inscription.php text-dark">Connexion</a>
+
+                    <a class="icon-btn" href="inscription.php">
+                        <i class="bi bi-person"></i>
+                    </a>
+
                 <?php endif; ?>
-                <a class="icon-btn text-dark" href="#"><i class="bi bi-search"></i></a>
-                <a class="icon-btn text-dark" href="#"><i class="bi bi-bag"></i></a>
+
+                <!-- 🛒 Panier -->
+                <a class="icon-btn" href="panier.php">
+                    <i class="bi bi-bag"></i>
+                </a>
+
+                <!-- ❤️ Favoris (UN SEUL maintenant) -->
+                <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
+                    Mes favoris
+                </a>
+
             </div>
+
         </div>
     </div>
 </nav>
