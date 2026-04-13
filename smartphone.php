@@ -29,6 +29,7 @@ require_once 'config.php';
         </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
+
             <ul class="navbar-nav ms-3 me-auto gap-lg-3">
                 <li class="nav-item">
                     <a class="nav-link active" href="acceil.php">Accueil</a>
@@ -38,22 +39,54 @@ require_once 'config.php';
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                         Vente
                     </a>
+
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
-                        <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
-                        <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
-                        <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger fw-bold" href="#">Voir tout</a></li>
+                        <li>
+                            <a class="dropdown-item" href="smartphone.php">
+                                📱 Smartphones et Montre ⌚️
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="informatique.php">
+                                💻 Informatique
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="console.php">
+                                🎮 Gaming
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="casque.php">
+                                🎧 Audio & Casques
+                            </a>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item text-danger fw-bold" href="#">
+                                Voir tout
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="a-propos-de-nous.html">À propos de nous</a>
+                    <a class="nav-link" href="a-propos-de-nous.html">
+                        À propos de nous
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.php">Contact</a>
+                    <a class="nav-link" href="contact.php">
+                        Contact
+                    </a>
                 </li>
 
                 <?php if (function_exists('isAdmin') && isAdmin()): ?>
@@ -63,9 +96,10 @@ require_once 'config.php';
                         </a>
                     </li>
                 <?php endif; ?>
+
             </ul>
 
-            <!-- 🔍 Barre de recherche ajoutée ici -->
+            <!-- 🔍 Barre de recherche -->
             <form class="d-flex me-3" method="GET" action="recherche.php">
                 <input 
                     class="form-control" 
@@ -73,15 +107,20 @@ require_once 'config.php';
                     name="q" 
                     placeholder="Rechercher..."
                 >
+
                 <button class="btn btn-danger ms-2" type="submit">
                     OK
                 </button>
             </form>
 
+            <!-- 👤 Icônes utilisateur -->
             <div class="d-flex align-items-center gap-3">
+
                 <?php if (isset($_SESSION['id_u'])): ?>
+
                     <a class="icon-btn d-flex align-items-center gap-2 text-decoration-none text-dark" href="profile.php">
                         <i class="bi bi-person-fill text-danger"></i>
+
                         <span class="fw-semibold small">
                             <?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?>
                         </span>
@@ -90,19 +129,25 @@ require_once 'config.php';
                     <a class="icon-btn" href="deconnexion.php">
                         <i class="bi bi-box-arrow-right"></i>
                     </a>
+
                 <?php else: ?>
+
                     <a class="icon-btn" href="inscription.php">
                         <i class="bi bi-person"></i>
                     </a>
+
                 <?php endif; ?>
 
-                <a class="icon-btn" href="#">
+                <!-- 🛒 Panier -->
+                <a class="icon-btn" href="panier.php">
                     <i class="bi bi-bag"></i>
                 </a>
 
+                <!-- ❤️ Favoris (UN SEUL maintenant) -->
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
                     Mes favoris
                 </a>
+
             </div>
 
         </div>
