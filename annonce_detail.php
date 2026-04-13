@@ -138,7 +138,7 @@ $s = $annonce['status'];
             <!-- Bouton contacter -->
             <?php if (isset($_SESSION['id_u'])): ?>
                 <a href="contact_vendeur.php?id_u=<?= (int)$annonce['id_u'] ?>&id_a=<?= (int)$annonce['id_a'] ?>" 
-                   class="btn btn-primary w-100 mb-3 py-3 fs-5">
+                class="btn btn-danger w-100 mb-3 py-3 fs-5 fw-bold">
                     Contacter le vendeur
                 </a>
               
