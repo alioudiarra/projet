@@ -102,19 +102,8 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                     </a>
                 <?php endif; ?>
 
-<<<<<<< HEAD
-                <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">Mes favoris</a>
-=======
-                <a class="icon-btn" href="#">
-                    <i class="bi bi-bag"></i>
-                </a>
-
-                <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
-                    Mes favoris
-                </a>
->>>>>>> ac004b3d6aa9f75551a46f74de3f2445d6edda56
             </div>
 
         </div>
