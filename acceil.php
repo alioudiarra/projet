@@ -77,7 +77,7 @@ $resultat = mysqli_stmt_get_result($stmt);
 
 <body>
 
-<!-- NAVBAR -->
+//NAVBAR
 
 <nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
 <div class="container">
@@ -107,7 +107,7 @@ Vente
 
 <li>
 <a class="dropdown-item" href="smartphone.php">
-📱 Smartphones et Montre ⌚️
+ Smartphones et Montre 
 </a>
 </li>
 
@@ -119,13 +119,13 @@ Vente
 
 <li>
 <a class="dropdown-item" href="console.php">
-🎮 Gaming
+ Gaming
 </a>
 </li>
 
 <li>
 <a class="dropdown-item" href="casque.php">
-🎧 Audio & Casques
+Audio & Casques
 </a>
 </li>
 
@@ -158,7 +158,7 @@ Contact
 </a>
 </li>
 
-<!-- Admin -->
+//Admin
 
 <?php if (function_exists('isAdmin') && isAdmin()): ?>
 
@@ -172,7 +172,7 @@ Contact
 
 </ul>
 
-<!-- Partie droite -->
+ //Partie droite 
 
 <div class="d-flex align-items-center gap-3">
 
@@ -215,11 +215,11 @@ Mes favoris
 </div>
 </nav>
 
-<!-- CONTENU FAVORIS -->
+// CONTENU FAVORIS
 
 <div class="container mt-5">
 
-<h2 class="mb-4">❤️ Mes annonces favorites</h2>
+<h2 class="mb-4"> Mes annonces favorites</h2>
 
 <div class="row">
 
