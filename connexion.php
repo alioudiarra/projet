@@ -57,22 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert alert-danger"><?= htmlspecialchars($erreur) ?></div>
             <?php endif; ?>
 
-<<<<<<< HEAD
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="acceil.php">LEBONCOIN</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="users.php">Users</a></li>
-        <li class="nav-item"><a class="nav-link" href="chat.php">Chat</a></li>
-      </ul>
-      <a class="btn btn-danger" href="inscription.php">
-        Register <i class="fa-solid fa-person"></i>
-      </a>
-=======
             <form action="" method="post">
                 <div class="mb-3">
                     <label class="form-label">Pseudo ou Email</label>
@@ -87,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <hr>
             <p class="text-center small">Pas encore de compte ? <a href="inscription.php">S'inscrire</a></p>
         </div>
->>>>>>> 3882add5ad0d3962531e4e099c309bb0299b805c
     </div>
 </body>
-</html> 
+</html>
