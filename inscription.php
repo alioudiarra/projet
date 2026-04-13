@@ -1,7 +1,7 @@
 <?php
-session_start();//pour rester connecter a chaque fois 
+session_start();//pour rester connecter a chaque fois (stocker les infos)
 
-ini_set('display_errors', 1);
+ini_set('display_errors', 1);//force le php a afficher toutes les erreurs 
 error_reporting(E_ALL);
 
 
@@ -14,9 +14,9 @@ if (!$conn) {
 $message = "";
 
 // TRAITEMENT DU FORMULAIRE
-if (isset($_POST['register'])) {
-    
-    $pseudo = mysqli_real_escape_string($conn, $_POST['pseudo']);
+if (isset($_POST['register'])) { //post sur 
+    //piratage de BD via le formulaire
+    $pseudo = mysqli_real_escape_string($conn, $_POST['pseudo']); //permet d'eviter les injections Sql(les lettres ou chiffres ou il ne faut pas)
     $nom    = mysqli_real_escape_string($conn, $_POST['nom']);
     $email  = mysqli_real_escape_string($conn, $_POST['email']);
     $phone  = mysqli_real_escape_string($conn, $_POST['phone']);
@@ -41,7 +41,7 @@ if (isset($_POST['register'])) {
             $_SESSION['nom']     = $nom;
             $_SESSION['email']   = $email;
 
-            header("Location: profile.php");
+            header("Location: profile.php"); //permet de revenir a la page profile
             exit();
         } else {
             $message = "<p style='color:red;'>Erreur SQL : " . mysqli_error($conn) . "</p>";
@@ -73,7 +73,6 @@ if (isset($_POST['register'])) {
         <h2>Créer un compte</h2>
         
         <div class="msg"><?php echo $message; ?></div>
-
         <form action="" method="POST">
             <input type="text"  name="pseudo" placeholder="Pseudo" required>
             <input type="text"  name="nom"    placeholder="Nom complet" required>

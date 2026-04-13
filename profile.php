@@ -16,7 +16,7 @@ if (!isset($_SESSION['id_u'])) {
     exit();
 } 
 
-$id_u = (int) $_SESSION['id_u'];
+$id_u = (int) $_SESSION['id_u'];//permet de recuperer l'id de la personne connecter
 
 
 // 1. Récupération des informations de l'utilisateur
@@ -44,7 +44,7 @@ if (!$user) {
 // Récup annonces
 
 $annonces = [];
-$sqlAnnonces = "SELECT * FROM annnonce WHERE id_u = ? ORDER BY id_a DESC";
+$sqlAnnonces = "SELECT * FROM annnonce WHERE id_u = ? ORDER BY id_a DESC"; //recuperer uniquement les annonces creer les annonces creer par l'utilisateur actuel
 $stmtAnnonces = mysqli_prepare($conn, $sqlAnnonces);
 
 if ($stmtAnnonces) {
@@ -74,142 +74,141 @@ if ($stmtAnnonces) {
 
 
 
-<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top shadow-sm bg-white">
+    <div class="container">
+        <a class="navbar-brand brand-logo" href="acceil.php">
+            <span class="text-danger fw-bold">lebon</span>coin
+        </a>
 
-<a class="navbar-brand brand-logo" href="#">
-<span>lebon</span>coin
-</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-<span class="navbar-toggler-icon"></span>
-</button>
+        <div class="collapse navbar-collapse" id="mainNav">
 
-<div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-3 me-auto gap-lg-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="acceil.php">Accueil</a>
+                </li>
 
-<ul class="navbar-nav ms-3 me-auto gap-lg-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Vente
+                    </a>
 
-<li class="nav-item">
-<a class="nav-link active" href="acceil.php">Accueil</a>
-</li>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="smartphone.php">
+                                📱 Smartphones et Montre ⌚️
+                            </a>
+                        </li>
 
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-Vente
-</a>
+                        <li>
+                            <a class="dropdown-item" href="informatique.php">
+                                💻 Informatique
+                            </a>
+                        </li>
 
-<ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="console.php">
+                                🎮 Gaming
+                            </a>
+                        </li>
 
-<li>
-<a class="dropdown-item" href="smartphone.php">
-📱 Smartphones et Montre ⌚️
-</a>
-</li>
+                        <li>
+                            <a class="dropdown-item" href="casque.php">
+                                🎧 Audio & Casques
+                            </a>
+                        </li>
 
-<li>
-<a class="dropdown-item" href="informatique.php">
-💻 Informatique
-</a>
-</li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
-<li>
-<a class="dropdown-item" href="console.php">
-🎮 Gaming
-</a>
-</li>
+                        <li>
+                            <a class="dropdown-item text-danger fw-bold" href="#">
+                                Voir tout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-<li>
-<a class="dropdown-item" href="casque.php">
-🎧 Audio & Casques
-</a>
-</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="a-propos-de-nous.html">
+                        À propos de nous
+                    </a>
+                </li>
 
-<li><hr class="dropdown-divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">
+                        Contact
+                    </a>
+                </li>
 
-<li>
-<a class="dropdown-item text-danger fw-bold" href="#categories">
-Voir tout
-</a>
-</li>
+                <?php if (function_exists('isAdmin') && isAdmin()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger fw-bold" href="admin.php">
+                            <i class="bi bi-shield-lock-fill"></i> Admin
+                        </a>
+                    </li>
+                <?php endif; ?>
 
-</ul>
-</li>
+            </ul>
 
-<li class="nav-item">
-<a class="nav-link" href="a-propos-de-nous.php">
-À propos de nous
-</a>
-</li>
+            <!-- 🔍 Barre de recherche -->
+            <form class="d-flex me-3" method="GET" action="recherche.php">
+                <input 
+                    class="form-control" 
+                    type="search" 
+                    name="q" 
+                    placeholder="Rechercher..."
+                >
 
-<li class="nav-item">
-<a class="nav-link" href="#">
-Blog
-</a>
-</li>
+                <button class="btn btn-danger ms-2" type="submit">
+                    OK
+                </button>
+            </form>
 
-<li class="nav-item">
-<a class="nav-link" href="contact.php">
-Contact
-</a>
-</li>
+            <!-- 👤 Icônes utilisateur -->
+            <div class="d-flex align-items-center gap-3">
 
-<!-- Admin -->
+                <?php if (isset($_SESSION['id_u'])): ?>
 
-<?php if (function_exists('isAdmin') && isAdmin()): ?>
+                    <a class="icon-btn d-flex align-items-center gap-2 text-decoration-none text-dark" href="profile.php">
+                        <i class="bi bi-person-fill text-danger"></i>
 
-<li class="nav-item">
-<a class="nav-link text-danger fw-bold" href="admin.php">
-<i class="bi bi-shield-lock-fill"></i> Admin
-</a>
-</li>
+                        <span class="fw-semibold small">
+                            <?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?>
+                        </span>
+                    </a>
 
-<?php endif; ?>
+                    <a class="icon-btn" href="deconnexion.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
 
-</ul>
+                <?php else: ?>
 
-<!-- Partie droite -->
+                    <a class="icon-btn" href="inscription.php">
+                        <i class="bi bi-person"></i>
+                    </a>
 
-<div class="d-flex align-items-center gap-3">
+                <?php endif; ?>
 
-<?php if (isset($_SESSION['id_u'])): ?>
+                <!-- 🛒 Panier -->
+                <a class="icon-btn" href="panier.php">
+                    <i class="bi bi-bag"></i>
+                </a>
 
-<a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
-<i class="bi bi-person-fill text-danger"></i>
-<span class="fw-semibold small">
-<?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?>
-</span>
-</a>
+                <!-- ❤️ Favoris (UN SEUL maintenant) -->
+                <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
+                    Mes favoris
+                </a>
 
-<a class="icon-btn" href="deconnexion.php">
-<i class="bi bi-box-arrow-right"></i>
-</a>
+            </div>
 
-<?php else: ?>
-
-<a class="icon-btn" href="inscription.php">
-<i class="bi bi-person"></i>
-</a>
-
-<?php endif; ?>
-
-<a class="icon-btn" href="#">
-<i class="bi bi-search"></i>
-</a>
-
-<a class="icon-btn" href="#">
-<i class="bi bi-bag"></i>
-</a>
-
-<a class="nav-link p-0" href="favoris.php">
-Mes favoris
-</a>
-
-</div>
-
-</div>
-</div>
+        </div>
+    </div>
 </nav>
-
 <section class="py-5" style="background-color: #f7f7f7; min-height: 100vh;">
     <div class="container">
         <div class="row g-4">
@@ -246,8 +245,8 @@ Mes favoris
     <?php if (!empty($annonces)) : ?>
         <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
             
-            <div class="carousel-inner">
-                <?php foreach ($annonces as $index => $annonce) : ?>
+            <div class="carousel-inner"> 
+                <?php foreach ($annonces as $index => $annonce) : ?> //parcours la table annonce et cree le carrosel pour chaque annonce 
                     <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
                         <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                             <div class="row g-0 align-items-center">

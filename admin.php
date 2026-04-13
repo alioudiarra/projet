@@ -1,15 +1,10 @@
 <?php
 session_start();
-
-// ============================================================
 //  ROLES
-// ============================================================
 define('ROLE_ADMIN', 0);
 define('ROLE_USER', 1);
 
-// ============================================================
 //  CONNEXION BDD
-// ============================================================
 $host   = "localhost";
 $dbname = "projet";
 $userdb = "root";
@@ -20,10 +15,7 @@ $conn = mysqli_connect($host, $userdb, $passdb, $dbname);
 if (!$conn) {
     die("Erreur de connexion : " . mysqli_connect_error());
 }
-
-// ============================================================
 //  SÉCURITÉ — accolades + redirect ajoutés
-// ============================================================
 if (!isset($_SESSION['id_u']) || ($_SESSION['perm'] ?? null) != ROLE_ADMIN) {
     header("Location: acceil.php");
     exit;
@@ -31,10 +23,7 @@ if (!isset($_SESSION['id_u']) || ($_SESSION['perm'] ?? null) != ROLE_ADMIN) {
 
 $message  = '';
 $type_msg = '';
-
-// ============================================================
 //  SUPPRESSION
-// ============================================================
 if (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
 
     $id = (int) $_POST['id_u'];
@@ -52,10 +41,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
         $type_msg = "succes";
     }
 }
-
-// ============================================================
 //  CHANGEMENT PERMISSION
-// ============================================================
 if (isset($_POST['action']) && $_POST['action'] === 'changer_perm') {
 
     $id            = (int) $_POST['id_u'];
@@ -76,10 +62,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'changer_perm') {
         $type_msg = "succes";
     }
 }
-
-// ============================================================
 //  RECHERCHE
-// ============================================================
 $recherche = isset($_GET['q']) ? trim($_GET['q']) : '';
 
 if ($recherche !== '') {
@@ -105,10 +88,7 @@ $utilisateurs = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $utilisateurs[] = $row;
 }
-
-// ============================================================
 //  STATS
-// ============================================================
 $total = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM users"))[0];
 
 $nb_admins = mysqli_fetch_row(

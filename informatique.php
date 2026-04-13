@@ -19,66 +19,139 @@ require_once 'config.php';
 
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top shadow-sm bg-white">
+    <div class="container">
+        <a class="navbar-brand brand-logo" href="acceil.php">
+            <span class="text-danger fw-bold">lebon</span>coin
+        </a>
 
-    <a class="navbar-brand brand-logo" href="#">
-      <span>lebon</span>coin
-    </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <div class="collapse navbar-collapse" id="mainNav">
 
-    <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-3 me-auto gap-lg-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="acceil.php">Accueil</a>
+                </li>
 
-      <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-        <li class="nav-item"><a class="nav-link active" href="acceil.php">Accueil</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Vente
+                    </a>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-            Vente
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
-            <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
-            <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
-            <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger fw-bold" href="#categories">Voir tout</a></li>
-          </ul>
-        </li>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="smartphone.php">
+                                📱 Smartphones et Montre ⌚️
+                            </a>
+                        </li>
 
-        <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                        <li>
+                            <a class="dropdown-item" href="informatique.php">
+                                💻 Informatique
+                            </a>
+                        </li>
 
-        <!-- Lien Admin visible seulement si perm = 1 -->
-        <?php if (isAdmin()): ?>         
-          <li class="nav-item">
-            <a class="nav-link text-danger fw-bold" href="admin.php">
-              <i class="bi bi-shield-lock-fill"></i> Admin
-            </a>
-          </li>
-        <?php endif; ?>  
-      </ul><!-- ← fermeture ul manquante -->
+                        <li>
+                            <a class="dropdown-item" href="console.php">
+                                🎮 Gaming
+                            </a>
+                        </li>
 
-      <div class="d-flex align-items-center gap-3">
-        <?php if (isset($_SESSION['id_u'])): ?>
-          <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
-            <i class="bi bi-person-fill text-danger"></i>
-            <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
-          </a>
-          <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
-        <?php else: ?>
-          <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
-        <?php endif; ?>
+                        <li>
+                            <a class="dropdown-item" href="casque.php">
+                                🎧 Audio & Casques
+                            </a>
+                        </li>
 
-        <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-        <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
-      </div>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
+                        <li>
+                            <a class="dropdown-item text-danger fw-bold" href="#">
+                                Voir tout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="a-propos-de-nous.html">
+                        À propos de nous
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">
+                        Contact
+                    </a>
+                </li>
+
+                <?php if (function_exists('isAdmin') && isAdmin()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger fw-bold" href="admin.php">
+                            <i class="bi bi-shield-lock-fill"></i> Admin
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+            </ul>
+
+            <!-- 🔍 Barre de recherche -->
+            <form class="d-flex me-3" method="GET" action="recherche.php">
+                <input 
+                    class="form-control" 
+                    type="search" 
+                    name="q" 
+                    placeholder="Rechercher..."
+                >
+
+                <button class="btn btn-danger ms-2" type="submit">
+                    OK
+                </button>
+            </form>
+
+            <!-- 👤 Icônes utilisateur -->
+            <div class="d-flex align-items-center gap-3">
+
+                <?php if (isset($_SESSION['id_u'])): ?>
+
+                    <a class="icon-btn d-flex align-items-center gap-2 text-decoration-none text-dark" href="profile.php">
+                        <i class="bi bi-person-fill text-danger"></i>
+
+                        <span class="fw-semibold small">
+                            <?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?>
+                        </span>
+                    </a>
+
+                    <a class="icon-btn" href="deconnexion.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
+
+                <?php else: ?>
+
+                    <a class="icon-btn" href="inscription.php">
+                        <i class="bi bi-person"></i>
+                    </a>
+
+                <?php endif; ?>
+
+                <!-- 🛒 Panier -->
+                <a class="icon-btn" href="panier.php">
+                    <i class="bi bi-bag"></i>
+                </a>
+
+                <!-- ❤️ Favoris (UN SEUL maintenant) -->
+                <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
+                    Mes favoris
+                </a>
+
+            </div>
+
+        </div>
     </div>
-  </div>
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -17,7 +17,7 @@ $sql = "SELECT a.* FROM annnonce a
         WHERE l.id_u = ? 
         ORDER BY a.id_a DESC";
 
-$stmt = mysqli_prepare($conn, $sql);
+$stmt = mysqli_prepare($conn, $sql); // ? remplacer par l'id de maniere securise 
 mysqli_stmt_bind_param($stmt, "i", $id_u);
 mysqli_stmt_execute($stmt);
 $resultat = mysqli_stmt_get_result($stmt);
@@ -105,16 +105,12 @@ Voir tout
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="a-propos-de-nous.php">
+<a class="nav-link" href="a-propos-de-nous.html">
 À propos de nous
 </a>
 </li>
 
-<li class="nav-item">
-<a class="nav-link" href="#">
-Blog
-</a>
-</li>
+
 
 <li class="nav-item">
 <a class="nav-link" href="contact.php">
@@ -140,7 +136,7 @@ Contact
 
 <div class="d-flex align-items-center gap-3">
 
-<?php if (isset($_SESSION['id_u'])): ?>
+<?php if (isset($_SESSION['id_u'])): ?> 
 
 <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
 <i class="bi bi-person-fill text-danger"></i>
