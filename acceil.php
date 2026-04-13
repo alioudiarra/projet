@@ -145,9 +145,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
                 <!-- 🛒 Panier -->
-                <a class="icon-btn" href="panier.php">
-                    <i class="bi bi-bag"></i>
-                </a>
+                
 
                 <!-- ❤️ Favoris (UN SEUL maintenant) -->
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">
