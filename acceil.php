@@ -83,7 +83,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="a-propos-de-nous.html">
+                    <a class="nav-link" href="a-propos-de-nous.php">
                         À propos de nous
                     </a>
                 </li>
