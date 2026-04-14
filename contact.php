@@ -22,66 +22,86 @@ require_once 'config.php';
 
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light py-3 sticky-top shadow-sm bg-white">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3" href="acceil.php">
+            <span class="text-danger">lebon</span>coin
+        </a>
 
-    <a class="navbar-brand brand-logo" href="#">
-      <span>lebon</span>coin
-    </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 gap-2">
+                <li class="nav-item">
+                    <a class="nav-link active" href="acceil.php">Accueil</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vente</a>
+                    <ul class="dropdown-menu border-0 shadow-sm">
+                        <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones & Montres</a></li>
+                        <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
+                        <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
+                        <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="a-propos-de-nous.php">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+                <?php if (function_exists('isAdmin') && isAdmin()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger fw-bold" href="admin.php">
+                            <i class="bi bi-shield-lock-fill"></i> Admin
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
 
-    <div class="collapse navbar-collapse" id="mainNav">
+            <form class="d-flex me-lg-4" method="GET" action="recherche.php">
+                <div class="input-group">
+                    <input class="form-control border-danger-subtle" type="search" name="q" placeholder="Rechercher un produit...">
+                    <button class="btn btn-danger" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
 
-      <ul class="navbar-nav ms-3 me-auto gap-lg-3">
-        <li class="nav-item"><a class="nav-link active" href="acceil.php">Accueil</a></li>
+            <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                <a class="text-dark position-relative" href="messagerie.php" title="Messages">
+                    <i class="bi bi-chat-dots fs-4"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                </a>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-            Vente
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
-            <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
-            <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
-            <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
-            <li><hr class="dropdown-divider"></li>
-            
-          </ul>
-        </li>
+                <a class="text-dark" href="favoris.php" title="Mes favoris">
+                    <i class="bi bi-heart fs-4"></i>
+                </a>
 
-        <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                <a class="text-dark" href="panier.php" title="Mon panier">
+                    <i class="bi bi-bag fs-4"></i>
+                </a>
 
-        <!-- Lien Admin visible seulement si perm = 1 -->
-        <?php if (isAdmin()): ?>         
-          <li class="nav-item">
-            <a class="nav-link text-danger fw-bold" href="admin.php">
-              <i class="bi bi-shield-lock-fill"></i> Admin
-            </a>
-          </li>
-        <?php endif; ?>  
-      </ul><!-- ← fermeture ul manquante -->
-
-      <div class="d-flex align-items-center gap-3">
-        <?php if (isset($_SESSION['id_u'])): ?>
-          <a class="icon-btn d-flex align-items-center gap-2" href="profile.php">
-            <i class="bi bi-person-fill text-danger"></i>
-            <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
-          </a>
-          <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
-        <?php else: ?>
-          <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
-        <?php endif; ?>
-
-        <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
-        <a class="icon-btn" href="#"><i class="bi bi-bag"></i></a>
-      </div>
-
+                <div class="ms-2 border-start ps-3 d-flex align-items-center">
+                    <?php if (isset($_SESSION['id_u'])): ?>
+                        <div class="dropdown">
+                            <a class="d-flex align-items-center text-decoration-none text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle fs-4 text-danger me-2"></i>
+                                <span class="fw-semibold small d-none d-xl-inline"><?= htmlspecialchars($_SESSION['pseudo'] ?? 'Mon Compte') ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm">
+                                <li><a class="dropdown-item" href="profile.php"><i class="bi bi-person me-2"></i>Mon Profil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="deconnexion.php"><i class="bi bi-box-arrow-right me-2"></i>Déconnexion</a></li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <a class="btn btn-outline-danger btn-sm rounded-pill px-3" href="inscription.php">Connexion</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 
 <div class="form-wrapper">
