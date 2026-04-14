@@ -124,12 +124,6 @@ if ($stmtAnnonces) {
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-
-                        <li>
-                            <a class="dropdown-item text-danger fw-bold" href="#">
-                                Voir tout
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
@@ -256,7 +250,7 @@ if ($stmtAnnonces) {
                                 <div class="col-md-6 p-4">
                                     <h3 class="fw-bold"><?= htmlspecialchars($annonce['title']) ?></h3>
                                     <p class="text-danger fs-3 fw-bold"><?= number_format((float)$annonce['price'], 2, ',', ' ') ?> €</p>
-                                    <a href="article.php?id=<?= $annonce['id_a'] ?>" class="btn btn-dark">Voir</a>
+                                    <a href="annonce_detail.php?id=<?= $annonce['id_a'] ?>" class="btn btn-dark">Voir</a>
                                 </div>
                             </div>
                         </div>
