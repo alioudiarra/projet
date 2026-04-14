@@ -2,10 +2,10 @@
 require_once 'config.php';
 require_once 'database.php';
 
-// 1. Récupérer les annonces de type smartphone et montre
+// 1. Récupérer les annonces de type informatique
 $annonces = [];
-// On filtre ici sur les types liés à la téléphonie
-$sql = "SELECT * FROM annnonce WHERE type = 'smartphone' OR type = 'montre' OR type = 'accessoire telephone' ORDER BY id_a DESC";
+// On filtre sur les types liés au matériel informatique
+$sql = "SELECT * FROM annnonce WHERE type = 'ordinateur' OR type = 'clavier' OR type = 'souris' OR type = 'ecran' OR type = 'composant' ORDER BY id_a DESC";
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
@@ -20,7 +20,7 @@ if ($result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartphones & Montres - LEBONCOIN GRP 4</title>
+    <title>Informatique - LEBONCOIN GRP 4</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -48,12 +48,12 @@ if ($result) {
                         Vente
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item fw-bold" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
-                        <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
+                        <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
+                        <li><a class="dropdown-item fw-bold" href="informatique.php">💻 Informatique</a></li>
                         <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
                         <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        
+                        <li><a class="dropdown-item text-danger fw-bold" href="toutes_annonces.php">Voir tout</a></li>
                     </ul>
                 </li>
 
@@ -70,7 +70,7 @@ if ($result) {
             </ul>
 
             <form class="d-flex me-3" method="GET" action="recherche.php">
-                <input class="form-control" type="search" name="q" placeholder="Rechercher un téléphone...">
+                <input class="form-control" type="search" name="q" placeholder="Rechercher un PC, un écran...">
                 <button class="btn btn-danger ms-2" type="submit">OK</button>
             </form>
 
@@ -94,8 +94,8 @@ if ($result) {
 <div class="container py-5">
     <div class="text-center mb-5">
         <p class="text-danger fw-bold text-uppercase mb-2">Catégorie</p>
-        <h1 class="fw-bold display-5 mb-2">📱 Smartphones & Montres</h1>
-        <p class="text-muted">Retrouvez les derniers téléphones et accessoires connectés</p>
+        <h1 class="fw-bold display-5 mb-2">💻 Informatique</h1>
+        <p class="text-muted">Ordinateurs portables, fixes et périphériques</p>
     </div>
 
     <div class="row g-4">
@@ -112,12 +112,12 @@ if ($result) {
                                      alt="<?= htmlspecialchars($annonce['title']) ?>">
                             <?php else: ?>
                                 <div class="bg-light d-flex align-items-center justify-content-center rounded-top-4" style="height: 220px;">
-                                    <i class="bi bi-phone text-muted" style="font-size: 3rem;"></i>
+                                    <i class="bi bi-laptop text-muted" style="font-size: 3rem;"></i>
                                 </div>
                             <?php endif; ?>
 
                             <div class="card-body">
-                                <span class="badge bg-primary mb-2"><?= htmlspecialchars($annonce['type']) ?></span>
+                                <span class="badge bg-dark mb-2"><?= htmlspecialchars($annonce['type']) ?></span>
                                 <h5 class="card-title fw-bold text-truncate"><?= htmlspecialchars($annonce['title']) ?></h5>
                                 <p class="card-text text-muted small text-truncate"><?= htmlspecialchars($annonce['desc']) ?></p>
                             </div>
@@ -139,8 +139,8 @@ if ($result) {
             <?php endforeach; ?>
         <?php else: ?>
             <div class="col-12 text-center py-5">
-                <i class="bi bi-search text-muted" style="font-size: 4rem;"></i>
-                <p class="text-muted fs-5 mt-3">Aucun smartphone disponible pour le moment.</p>
+                <i class="bi bi-pc-display text-muted" style="font-size: 4rem;"></i>
+                <p class="text-muted fs-5 mt-3">Aucun matériel informatique disponible pour le moment.</p>
                 <a href="acceil.php" class="btn btn-outline-danger mt-2">Retour à l'accueil</a>
             </div>
         <?php endif; ?>

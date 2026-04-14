@@ -1,29 +1,58 @@
 <?php
-require_once 'config.php';
-require_once 'database.php';
+session_start(); 
 
-// Récupérer les annonces de type console
-$annonces = [];
-$sql = "SELECT * FROM annnonce WHERE type = 'console' OR type = 'manette' OR type = 'jeux video' ORDER BY id_a DESC";
-$result = mysqli_query($conn, $sql);
+// Affichage des erreurs pour le développement
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $annonces[] = $row;
+// Connexion à la base de données
+if (file_exists('config.php')) {
+    require_once 'config.php';
+}
+
+// Fonction de vérification admin (simple sécurité pour l'affichage)
+function isAdmin() {
+    return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming - LEBONCOIN GRP 4</title>
+    <title>À propos de nous - LEBONCOIN GRP 4</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
 
-<body><nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top shadow-sm bg-white">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .about-section {
+            padding: 40px;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .brand-logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #333;
+        }
+        .brand-logo span {
+            color: #ff3e3e; /* Couleur Leboncoin */
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom py-3 sticky-top shadow-sm bg-white">
     <div class="container">
         <a class="navbar-brand brand-logo" href="acceil.php">
             <span class="text-danger fw-bold">lebon</span>coin
@@ -77,7 +106,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="a-propos-de-nous.html">
+                    <a class="nav-link" href="a-propos-de-nous.php">
                         À propos de nous
                     </a>
                 </li>
@@ -152,66 +181,44 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 </nav>
-<!-- ===== CONTENU GAMING ===== -->
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <p class="text-danger fw-bold text-uppercase mb-2">Catégorie</p>
-        <h1 class="fw-bold display-5 mb-2">🎮 Gaming</h1>
-        <p class="text-muted">Consoles, manettes et jeux vidéo</p>
+
+<header class="bg-dark text-white text-center py-5">
+    <h1 class="display-4">À propos de nous</h1>
+    <p class="lead">Découvrez l'équipe derrière LEBONCOIN GRP 4</p>
+</header>
+
+<main class="container">
+    <section class="about-section">
+        <h2>Qui sommes-nous ?</h2>
+        <p>Nous sommes une équipe passionnée par le développement web et le monde du numérique en vue de proposer des solutions adaptées à vos besoins.</p>
+    </section>
+
+    <section class="about-section">
+        <h2>Notre mission</h2>
+        <p>Notre mission est d’aider les clients à acheter des articles de qualité sans avoir à se déplacer, en toute sécurité.</p>
+    </section>
+
+    <section class="about-section text-center">
+        <h2>Notre équipe</h2>
+        <p>Composée de développeurs, designers et experts en data, nous travaillons chaque jour pour améliorer votre expérience.</p>
+        <div class="row mt-4">
+            <div class="col-4"><strong>Développeurs</strong></div>
+            <div class="col-4"><strong>Designers</strong></div>
+            <div class="col-4"><strong>Experts Data</strong></div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2026 LEBONCOIN GRP 4 - Tous droits réservés.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="#" class="text-white-50 text-decoration-none">Mentions légales</a>
+            <a href="#" class="text-white-50 text-decoration-none">SAV</a>
+            <a href="contact.php" class="text-white-50 text-decoration-none">Contact</a>
+        </div>
     </div>
-
-    <?php if (isset($_GET['success'])): ?>
-        <div class="alert alert-success text-center">Annonce ajoutée avec succès !</div>
-    <?php endif; ?>
-
-    <div class="row g-4">
-        <?php if (!empty($annonces)): ?>
-            <?php foreach ($annonces as $annonce): ?>
-                <!-- ✅ Carte cliquable vers annonce_detail.php -->
-                <div class="col-sm-6 col-lg-4">
-                    <a href="annonce_detail.php?id=<?= (int)$annonce['id_a'] ?>" class="text-decoration-none text-dark">
-                        <div class="card h-100 shadow-sm border-0 rounded-4">
-
-                            <?php if (!empty($annonce['img'])): ?>
-                                <img src="<?= htmlspecialchars($annonce['img']) ?>"
-                                     class="card-img-top rounded-top-4"
-                                     style="height: 220px; object-fit: cover;"
-                                     alt="<?= htmlspecialchars($annonce['title']) ?>">
-                            <?php else: ?>
-                                <div class="bg-light d-flex align-items-center justify-content-center rounded-top-4" style="height: 220px;">
-                                    <i class="bi bi-controller text-muted" style="font-size: 3rem;"></i>
-                                </div>
-                            <?php endif; ?>
-
-                            <div class="card-body">
-                                <span class="badge bg-danger mb-2"><?= htmlspecialchars($annonce['type']) ?></span>
-                                <h5 class="card-title fw-bold"><?= htmlspecialchars($annonce['title']) ?></h5>
-                                <p class="card-text text-muted small"><?= htmlspecialchars($annonce['desc']) ?></p>
-                            </div>
-
-                            <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center pb-3">
-                                <span class="fw-bold text-danger fs-5"><?= number_format($annonce['price'], 2) ?> €</span>
-                                <?php
-                                    $statuts  = [1 => 'Disponible', 2 => 'Vendu', 3 => 'Réservé'];
-                                    $couleurs = [1 => 'success', 2 => 'secondary', 3 => 'warning'];
-                                    $s = $annonce['status'];
-                                ?>
-                                <span class="badge bg-<?= $couleurs[$s] ?? 'secondary' ?>">
-                                    <?= $statuts[$s] ?? 'Inconnu' ?>
-                                </span>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="col-12 text-center">
-                <p class="text-muted fs-5">Aucune annonce gaming pour le moment.</p>
-            </div>
-        <?php endif; ?>
-    </div>
-</div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

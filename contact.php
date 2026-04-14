@@ -48,12 +48,11 @@ require_once 'config.php';
             <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
             <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger fw-bold" href="#categories">Voir tout</a></li>
+            
           </ul>
         </li>
 
         <li class="nav-item"><a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 
         <!-- Lien Admin visible seulement si perm = 1 -->

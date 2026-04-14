@@ -17,10 +17,26 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEBONCOIN GRP 4</title>
+    <title>LEBONCOIN GRP 4 - Accueil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Effet de survol pour indiquer que c'est cliquable */
+        .clickable-img {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .clickable-img:hover {
+            transform: scale(1.03);
+        }
+        .card-title a {
+            transition: color 0.2s;
+        }
+        .card-title a:hover {
+            color: #dc3545 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +51,6 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
         </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
-
             <ul class="navbar-nav ms-3 me-auto gap-lg-3">
                 <li class="nav-item">
                     <a class="nav-link active" href="acceil.php">Accueil</a>
@@ -45,7 +60,6 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                         Vente
                     </a>
-
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" href="smartphone.php">
@@ -74,24 +88,15 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li>
-                            <a class="dropdown-item text-danger fw-bold" href="#">
-                                Voir tout
-                            </a>
-                        </li>
+                       
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="a-propos-de-nous.html">
-                        À propos de nous
-                    </a>
+                    <a class="nav-link" href="a-propos-de-nous.php">À propos de nous</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.php">
-                        Contact
-                    </a>
+                    <a class="nav-link" href="contact.php">Contact</a>
                 </li>
 
                 <?php if (function_exists('isAdmin') && isAdmin()): ?>
@@ -101,56 +106,47 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         </a>
                     </li>
                 <?php endif; ?>
-
             </ul>
 
-            <!-- 🔍 Barre de recherche -->
             <form class="d-flex me-3" method="GET" action="recherche.php">
-                <input 
-                    class="form-control" 
-                    type="search" 
-                    name="q" 
-                    placeholder="Rechercher..."
-                >
-
-                <button class="btn btn-danger ms-2" type="submit">
-                    OK
-                </button>
+                <input class="form-control" type="search" name="q" placeholder="Rechercher...">
+                <button class="btn btn-danger ms-2" type="submit">OK</button>
             </form>
+            <a class="icon-btn position-relative" href="messagerie.php" title="Mes messages">
+    <i class="bi bi-chat-dots fs-4"></i>
+    <?php
+    
+    ?>
+    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+        <span class="visually-hidden">Nouveaux messages</span>
+    </span>
+</a>
 
-            <!-- 👤 Icônes utilisateur -->
             <div class="d-flex align-items-center gap-3">
-
                 <?php if (isset($_SESSION['id_u'])): ?>
-
                     <a class="icon-btn d-flex align-items-center gap-2 text-decoration-none text-dark" href="profile.php">
                         <i class="bi bi-person-fill text-danger"></i>
-
-                        <span class="fw-semibold small">
-                            <?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?>
-                        </span>
+                        <span class="fw-semibold small"><?= htmlspecialchars($_SESSION['pseudo'] ?? '') ?></span>
                     </a>
-
-                    <a class="icon-btn" href="deconnexion.php">
-                        <i class="bi bi-box-arrow-right"></i>
-                    </a>
-
+                    <a class="icon-btn" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i></a>
                 <?php else: ?>
-
-                    <a class="icon-btn" href="inscription.php">
-                        <i class="bi bi-person"></i>
-                    </a>
-
+                    <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
                 <?php endif; ?>
 
+<<<<<<< HEAD
                 <a class="icon-btn" href="#"><i class="bi bi-search"></i></a>
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
+=======
+
+                <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
+                <!-- 🛒 Panier -->
+>>>>>>> c92586bd7f39e4007406c57552ef418b48032ab3
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">Mes favoris</a>
             </div>
-
         </div>
     </div>
 </nav>
+
 <div id="heroCarousel" class="carousel slide container mt-5" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
@@ -209,12 +205,18 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         <i class="bi <?= $isLikedPop ? 'bi-heart-fill' : 'bi-heart'; ?> text-danger fs-4"></i>
                     </a>
                 </div>
-                <img src="<?= $pop['img']; ?>" class="card-img-top p-3" style="height: 200px; object-fit: contain;">
+                
+                <a href="annonce_detail.php?id=<?= $pop['id_a']; ?>">
+                    <img src="<?= $pop['img']; ?>" class="card-img-top p-3 clickable-img" style="height: 200px; object-fit: contain;" alt="<?= htmlspecialchars($pop['title']); ?>">
+                </a>
+
                 <div class="card-body text-center">
-                    <h5 class="card-title fw-bold"><?= htmlspecialchars($pop['title']); ?></h5>
+                    <h5 class="card-title fw-bold">
+                        <a href="annonce_detail.php?id=<?= $pop['id_a']; ?>" class="text-decoration-none text-dark"><?= htmlspecialchars($pop['title']); ?></a>
+                    </h5>
                     <p class="text-danger fw-bold fs-5"><?= number_format($pop['price'], 0, ',', ' '); ?>€</p>
                     <a href="ajouter_panier.php?id_a=<?php echo (int)$pop['id_a']; ?>" class="btn btn-danger w-100 rounded-pill">Ajouter au panier</a>               
-           </div>
+                </div>
             </div>
         </div>
         <?php endwhile; ?>
@@ -241,12 +243,16 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                     </a>
                 </div>
                 <div style="height: 180px; display: flex; align-items: center; justify-content: center;">
-                    <img src="<?= $row['img']; ?>" class="card-img-top p-2" style="max-height: 100%; width: auto; object-fit: contain;">
+                    <a href="annonce_detail.php?id=<?= $row['id_a']; ?>">
+                        <img src="<?= $row['img']; ?>" class="card-img-top p-2 clickable-img" style="max-height: 100%; width: auto; object-fit: contain;">
+                    </a>
                 </div>
                 <div class="card-body text-center">
-                    <h5 class="card-title fw-bold"><?= htmlspecialchars($row['title']); ?></h5>
+                    <h5 class="card-title fw-bold">
+                        <a href="annonce_detail.php?id=<?= $row['id_a']; ?>" class="text-decoration-none text-dark"><?= htmlspecialchars($row['title']); ?></a>
+                    </h5>
                     <p class="text-danger fw-bold fs-5"><?= number_format($row['price'], 0, ',', ' '); ?>€</p>
-                    <a href="article.php?id=<?= $row['id_a']; ?>" class="btn btn-outline-danger w-100 rounded-pill">Voir l'annonce</a>
+                    <a href="annonce_detail.php?id=<?= $row['id_a']; ?>" class="btn btn-outline-danger w-100 rounded-pill">Voir l'annonce</a>
                 </div>
             </div>
         </div>
@@ -255,7 +261,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 </section>
 
 <footer class="bg-dark text-light pt-5 pb-4">
-    <div class="container text-md-left">
+    <div class="container">
         <div class="row">
             <div class="col-md-3 mt-3">
                 <h5 class="text-uppercase fw-bold mb-4"><span style="color:red;">lebon</span>coin</h5>
@@ -277,7 +283,6 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 <h5 class="text-uppercase fw-bold mb-4">Contact</h5>
                 <p><i class="bi bi-house me-2"></i> Paris, 75015 France</p>
                 <p><i class="bi bi-envelope me-2"></i> contact@leboncoin.com</p>
-                <p><i class="bi bi-phone me-2"></i> +33 1 23 45 67 89</p>
             </div>
         </div>
         <hr class="mb-4">
@@ -293,4 +298,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
         </div>
     </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
