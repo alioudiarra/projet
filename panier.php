@@ -33,7 +33,7 @@ $total = 0;
                             <th>Image</th>
                             <th>Produit</th>
                             <th>Prix</th>
-                        </tr>
+                            <th>Action</th> </tr>
                     </thead>
                     <tbody>
                         <?php
@@ -55,6 +55,11 @@ $total = 0;
                                 <td class="text-danger fw-bold">
                                     <?= number_format($row['price'], 0, ',', ' '); ?> €
                                 </td>
+                                <td>
+                                    <a href="retirer_panier.php?id_a=<?= $row['id_a']; ?>" class="btn btn-sm btn-outline-danger">
+                                        Retirer
+                                    </a>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
@@ -62,7 +67,7 @@ $total = 0;
                         <tr>
                             <th colspan="2" class="text-end">Total à régler :</th>
                             <th class="fs-5 text-danger"><?= number_format($total, 0, ',', ' '); ?> €</th>
-                        </tr>
+                            <th></th> </tr>
                     </tfoot>
                 </table>
             </div>

@@ -61,12 +61,34 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         Vente
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="smartphone.php">📱 Smartphones et Montre ⌚️</a></li>
-                        <li><a class="dropdown-item" href="informatique.php">💻 Informatique</a></li>
-                        <li><a class="dropdown-item" href="console.php">🎮 Gaming</a></li>
-                        <li><a class="dropdown-item" href="casque.php">🎧 Audio & Casques</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        
+                        <li>
+                            <a class="dropdown-item" href="smartphone.php">
+                                📱 Smartphones et Montre ⌚️
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="informatique.php">
+                                💻 Informatique
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="console.php">
+                                🎮 Gaming
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="casque.php">
+                                🎧 Audio & Casques
+                            </a>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                       
                     </ul>
                 </li>
 
@@ -113,6 +135,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 
 
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
+                <!-- 🛒 Panier -->
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">Mes favoris</a>
             </div>
         </div>
