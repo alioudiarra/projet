@@ -90,6 +90,15 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 <input class="form-control" type="search" name="q" placeholder="Rechercher...">
                 <button class="btn btn-danger ms-2" type="submit">OK</button>
             </form>
+            <a class="icon-btn position-relative" href="messagerie.php" title="Mes messages">
+    <i class="bi bi-chat-dots fs-4"></i>
+    <?php
+    
+    ?>
+    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+        <span class="visually-hidden">Nouveaux messages</span>
+    </span>
+</a>
 
             <div class="d-flex align-items-center gap-3">
                 <?php if (isset($_SESSION['id_u'])): ?>
@@ -101,6 +110,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 <?php else: ?>
                     <a class="icon-btn" href="inscription.php"><i class="bi bi-person"></i></a>
                 <?php endif; ?>
+
 
                 <a class="icon-btn" href="panier.php"><i class="bi bi-bag"></i></a>
                 <a class="nav-link p-0 fw-bold text-danger" href="favoris.php">Mes favoris</a>
