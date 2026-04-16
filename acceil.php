@@ -7,9 +7,9 @@ require_once 'database.php';
 $sqlPop = "SELECT * FROM annnonce LIMIT 6"; 
 $resultPop = mysqli_query($conn, $sqlPop);
 
-// 3. RÉCUPÉRATION DES ANNONCES VENDEURS (SAUF LES 6 PREMIERS)
-$sqlVendeurs = "SELECT * FROM annnonce ORDER BY id_a DESC LIMIT 100 OFFSET 6";
-$resultVendeurs = mysqli_query($conn, $sqlVendeurs);
+// 3. RÉCUPÉRATION DES 5 DERNIÈRES ANNONCES POUR LE CAROUSEL DU BAS
+$sqlDernieres = "SELECT * FROM annnonce ORDER BY id_a DESC LIMIT 5";
+$resultDernieres = mysqli_query($conn, $sqlDernieres);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,6 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Effet de survol pour indiquer que c'est cliquable */
         .clickable-img {
             transition: transform 0.3s ease;
             cursor: pointer;
@@ -35,6 +34,12 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
         }
         .card-title a:hover {
             color: #dc3545 !important;
+        }
+        /* Style pour harmoniser le nouveau carousel d'annonces */
+        .annonce-carousel-img {
+            height: 300px;
+            object-fit: contain;
+            background-color: #fdfdfd;
         }
     </style>
 </head>
@@ -90,7 +95,6 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
             <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
                 <a class="text-dark position-relative" href="messagerie.php" title="Messages">
                     <i class="bi bi-chat-dots fs-4"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
                 </a>
                     
                 <a class="text-dark" href="favoris.php" title="Mes favoris">
@@ -181,11 +185,9 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                         <i class="bi <?= $isLikedPop ? 'bi-heart-fill' : 'bi-heart'; ?> text-danger fs-4"></i>
                     </a>
                 </div>
-                
                 <a href="annonce_detail.php?id=<?= $pop['id_a']; ?>">
-                    <img src="<?= $pop['img']; ?>" class="card-img-top p-3 clickable-img" style="height: 200px; object-fit: contain;" alt="<?= htmlspecialchars($pop['title']); ?>">
+                    <img src="<?= $pop['img']; ?>" class="card-img-top p-3 clickable-img" style="height: 200px; object-fit: contain;">
                 </a>
-
                 <div class="card-body text-center">
                     <h5 class="card-title fw-bold">
                         <a href="annonce_detail.php?id=<?= $pop['id_a']; ?>" class="text-decoration-none text-dark"><?= htmlspecialchars($pop['title']); ?></a>
@@ -200,6 +202,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 </section>
 
 <section class="container my-5">
+<<<<<<< HEAD
     <h2 class="text-center mb-5 fw-bold">Dernières annonces</h2>
     <div class="row g-4">
        <?php while ($row = mysqli_fetch_assoc($resultVendeurs)) : 
@@ -230,14 +233,44 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                     </h5>
                     <p class="text-danger fw-bold fs-5"><?= number_format($row['price'], 0, ',', ' '); ?>€</p>
                     <a href="annonce_detail.php?id=<?= $row['id_a']; ?>" class="btn btn-outline-danger w-100 rounded-pill">Voir l'annonce</a>
+=======
+    <h2 class="text-center mb-5 fw-bold">Les dernières pépites</h2>
+    <div id="latestAnnoncesCarousel" class="carousel slide shadow-sm rounded-4 overflow-hidden" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <?php 
+            $first = true;
+            while ($row = mysqli_fetch_assoc($resultDernieres)) : 
+            ?>
+            <div class="carousel-item <?= $first ? 'active' : '' ?>">
+                <?php $first = false; ?>
+                <div class="row g-0 bg-white align-items-center">
+                    <div class="col-md-5 text-center p-4">
+                        <img src="<?= $row['img']; ?>" class="img-fluid annonce-carousel-img" alt="<?= htmlspecialchars($row['title']); ?>">
+                    </div>
+                    <div class="col-md-7 p-5">
+                        <h3 class="fw-bold mb-3"><?= htmlspecialchars($row['title']); ?></h3>
+                        <p class="text-danger fs-2 fw-bold mb-4"><?= number_format($row['price'], 0, ',', ' '); ?>€</p>
+                        <div class="d-flex gap-3">
+                            <a href="annonce_detail.php?id=<?= $row['id_a']; ?>" class="btn btn-danger btn-lg px-5 rounded-pill">Voir l'offre</a>
+                            <a href="ajouter_panier.php?id_a=<?= $row['id_a']; ?>" class="btn btn-outline-dark btn-lg px-4 rounded-pill"><i class="bi bi-bag"></i></a>
+                        </div>
+                    </div>
+>>>>>>> 62753be1a302ac5f15cdace4aca88c98e4239e50
                 </div>
             </div>
+            <?php endwhile; ?>
         </div>
-        <?php endwhile; ?>
+        <button class="carousel-control-prev" type="button" data-bs-target="#latestAnnoncesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#latestAnnoncesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        </button>
     </div>
 </section>
 
 <footer class="bg-dark text-light pt-5 pb-4">
+<<<<<<< HEAD
     <div class="container">
         <div class="row">
             <div class="col-md-3 mt-3">
@@ -272,6 +305,14 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                 <a href="#" class="text-light me-4 fs-4"><i class="bi bi-instagram"></i></a>
                 <a href="#" class="text-light me-4 fs-4"><i class="bi bi-twitter-x"></i></a>
             </div>
+=======
+    <div class="container text-center">
+        <p>© 2026 Copyright : <strong>LEBONCOIN - GRP 4 ECE</strong></p>
+        <div class="fs-3">
+            <i class="bi bi-facebook mx-2"></i>
+            <i class="bi bi-instagram mx-2"></i>
+            <i class="bi bi-twitter-x mx-2"></i>
+>>>>>>> 62753be1a302ac5f15cdace4aca88c98e4239e50
         </div>
     </div>
 </footer>
