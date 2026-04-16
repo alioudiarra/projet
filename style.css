@@ -354,9 +354,7 @@
   .navbar .dropdown:hover .dropdown-menu {
       display: block;
       margin-top: 0;
-  }
-<<<<<<< HEAD
-=======
+  }                                                     
 }
 /* ═══════════════════════════════════════════════════════════════
    CONTACT PAGE — Style Rouge & Noir (éléments du formulaire only)
@@ -658,5 +656,5 @@
   .form-wrapper {
     padding: 32px 12px 60px;
   }
->>>>>>> 2502880da73206ff05323aeae04a06df0ae3a893
 }
+  

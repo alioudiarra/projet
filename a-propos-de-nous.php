@@ -21,7 +21,7 @@ function isAdmin() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À propos de nous - LEBONCOIN GRP 4</title>
+    <title>À propos de nous - ElectroMarket GRP 4</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@ function isAdmin() {
 <nav class="navbar navbar-expand-lg navbar-light py-3 sticky-top shadow-sm bg-white">
     <div class="container">
         <a class="navbar-brand fw-bold fs-3" href="acceil.php">
-            <span class="text-danger">lebon</span>coin
+            <span class="text-danger">Electro</span>Market
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -136,7 +136,7 @@ function isAdmin() {
 
 <header class="bg-dark text-white text-center py-5">
     <h1 class="display-4">À propos de nous</h1>
-    <p class="lead">Découvrez l'équipe derrière LEBONCOIN GRP 4</p>
+    <p class="lead">Découvrez l'équipe derrière ElectroMarket GRP 4</p>
 </header>
 
 <main class="container">
@@ -163,7 +163,7 @@ function isAdmin() {
 
 <footer class="bg-dark text-white py-4 mt-5">
     <div class="container text-center">
-        <p>&copy; 2026 LEBONCOIN GRP 4 - Tous droits réservés.</p>
+        <p>&copy; 2026 ElectroMarket GRP 4 - Tous droits réservés.</p>
         <div class="d-flex justify-content-center gap-3">
             <a href="#" class="text-white-50 text-decoration-none">Mentions légales</a>
             <a href="#" class="text-white-50 text-decoration-none">SAV</a>

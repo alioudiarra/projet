@@ -23,7 +23,7 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon LeBonCoin - Accueil</title>
+    <title>Mon ElectroMarket - Accueil</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

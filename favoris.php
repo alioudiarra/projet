@@ -39,13 +39,11 @@ $resultat = mysqli_stmt_get_result($stmt);
 
 <body>
 
-<!-- NAVBAR DIRECTEMENT ICI -->
-
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-light py-3 sticky-top shadow-sm bg-white">
     <div class="container">
         <a class="navbar-brand fw-bold fs-3" href="acceil.php">
-            <span class="text-danger">lebon</span>coin
+            <span class="text-danger">Electro</span>Market
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -153,7 +151,7 @@ class="card-img-top">
 <?= number_format($annonce['price'], 2, ',', ' ') ?> €
 </p>
 
-<a href="article.php?id=<?= $annonce['id_a'] ?>" 
+<a href="annonce_detail.php?id=<?= $annonce['id_a'] ?>" 
 class="btn btn-dark btn-sm">
 Voir
 </a>

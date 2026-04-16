@@ -14,6 +14,7 @@ $gmail_password = "vqrx qsqn vosa bpxf";
 $destinataires = [
     "Ibrahimdjidji250@gmail.com",
     "Fommarc5@gmail.com",
+    "benbaz.2004@icloud.com",
 ];
 // ── 3. NETTOYAGE DES DONNÉES ─────────────────────────────────
 function nettoyer($data) {
@@ -115,7 +116,7 @@ if (empty($erreurs)) {
  
         $mail->send();
  
-        header("Location: formulaire_reclamation.html?statut=succes");
+        header("Location: contact.php?statut=succes");
         exit;
  
     } catch (Exception $e) {

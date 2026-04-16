@@ -20,7 +20,7 @@ if ($result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartphones & Montres - LEBONCOIN GRP 4</title>
+    <title>Smartphones & Montres - ElectroMarket GRP 4</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -30,7 +30,7 @@ if ($result) {
 <nav class="navbar navbar-expand-lg navbar-light py-3 sticky-top shadow-sm bg-white">
     <div class="container">
         <a class="navbar-brand fw-bold fs-3" href="acceil.php">
-            <span class="text-danger">lebon</span>coin
+            <span class="text-danger">Electro</span>Market
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">

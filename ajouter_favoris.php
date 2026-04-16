@@ -16,7 +16,7 @@ if (isset($_GET['id_a']) && isset($_SESSION['id_u'])) {
         // Supprimer (Retirer des favoris)
         $sql = "DELETE FROM `like` WHERE id_u = ? AND id_a = ?";
     } else {
-        // Insérer (Ajouter aux favoris)
+        // Insérer fav
         $sql = "INSERT INTO `like` (id_u, id_a) VALUES (?, ?)";
     }
     $stmt = mysqli_prepare($conn, $sql);

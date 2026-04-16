@@ -17,7 +17,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEBONCOIN GRP 4 - Accueil</title>
+    <title>ElectroMarket GRP 4 - Accueil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -39,11 +39,11 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
     </style>
 </head>
 
-<body>
+<<body>
 <nav class="navbar navbar-expand-lg navbar-light py-3 sticky-top shadow-sm bg-white">
     <div class="container">
         <a class="navbar-brand fw-bold fs-3" href="acceil.php">
-            <span class="text-danger">lebon</span>coin
+            <span class="text-danger">Electro</span>Market  
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -85,13 +85,14 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                     <button class="btn btn-danger" type="submit"><i class="bi bi-search"></i></button>
                 </div>
             </form>
-
+             
+          
             <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
                 <a class="text-dark position-relative" href="messagerie.php" title="Messages">
                     <i class="bi bi-chat-dots fs-4"></i>
                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
                 </a>
-
+                    
                 <a class="text-dark" href="favoris.php" title="Mes favoris">
                     <i class="bi bi-heart fs-4"></i>
                 </a>
@@ -203,7 +204,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
     <div class="row g-4">
        <?php while ($row = mysqli_fetch_assoc($resultVendeurs)) : 
             $isLiked = false;
-            if (isset($_SESSION['id_u'])) {
+            if (isset($_SESSION['id_u'])) { //favoris
                 $checkLike = mysqli_prepare($conn, "SELECT * FROM `like` WHERE id_u = ? AND id_a = ?");
                 mysqli_stmt_bind_param($checkLike, "ii", $_SESSION['id_u'], $row['id_a']);
                 mysqli_stmt_execute($checkLike);
@@ -216,12 +217,13 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
                     <a href="ajouter_favoris.php?id_a=<?= $row['id_a']; ?>">
                         <i class="bi <?= $isLiked ? 'bi-heart-fill' : 'bi-heart'; ?> text-danger fs-4"></i>
                     </a>
-                </div>
-                <div style="height: 180px; display: flex; align-items: center; justify-content: center;">
-                    <a href="annonce_detail.php?id=<?= $row['id_a']; ?>">
-                        <img src="<?= $row['img']; ?>" class="card-img-top p-2 clickable-img" style="max-height: 100%; width: auto; object-fit: contain;">
-                    </a>
-                </div>
+                </div> 
+            
+                <div class="img-container"> 
+                <a href="annonce_detail.php?id=<?= $row['id_a']; ?>">   
+            <img src="<?= $row['img']; ?>" class="card-img-top" alt="Produit">
+                </a>
+            </div>
                 <div class="card-body text-center">
                     <h5 class="card-title fw-bold">
                         <a href="annonce_detail.php?id=<?= $row['id_a']; ?>" class="text-decoration-none text-dark"><?= htmlspecialchars($row['title']); ?></a>
@@ -239,7 +241,7 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
     <div class="container">
         <div class="row">
             <div class="col-md-3 mt-3">
-                <h5 class="text-uppercase fw-bold mb-4"><span style="color:red;">lebon</span>coin</h5>
+                <h5 class="text-uppercase fw-bold mb-4"><span style="color:red;">Electro</span>Market</h5>
                 <p>Votre boutique tech en ligne préférée pour trouver les meilleures pépites informatiques et mobiles.</p>
             </div>
             <div class="col-md-2 mt-3">
@@ -257,13 +259,13 @@ $resultVendeurs = mysqli_query($conn, $sqlVendeurs);
             <div class="col-md-4 mt-3">
                 <h5 class="text-uppercase fw-bold mb-4">Contact</h5>
                 <p><i class="bi bi-house me-2"></i> Paris, 75015 France</p>
-                <p><i class="bi bi-envelope me-2"></i> contact@leboncoin.com</p>
+                <p><i class="bi bi-envelope me-2"></i> contact@ElectroMarket.com</p>
             </div>
         </div>
         <hr class="mb-4">
         <div class="row align-items-center">
             <div class="col-md-7">
-                <p>© 2026 Copyright : <strong>LEBONCOIN - GRP 4 ECE</strong></p>
+                <p>© 2026 Copyright : <strong>ElectroMarket - GRP 4 ECE</strong></p>
             </div>
             <div class="col-md-5 text-md-end">
                 <a href="#" class="text-light me-4 fs-4"><i class="bi bi-facebook"></i></a>

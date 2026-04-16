@@ -1,7 +1,9 @@
-/* 1. Paramètres généraux */
+/* ============================================================
+   1. PARAMÈTRES GÉNÉRAUX 
+   ============================================================ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa; /* Gris très clair pour faire ressortir les cartes */
+    background-color: #f8f9fa; /* Gris clair pour faire ressortir les cartes blanches */
     margin: 0;
     padding: 40px;
     color: #333;
@@ -15,82 +17,99 @@ h1 {
     letter-spacing: 2px;
 }
 
-/* 2. La Grille (Le secret de la mise en page) */
+/* ============================================================
+   2. LA GRILLE (Responsive Grid)
+   ============================================================ */
 .grille-annonces {
     display: grid;
-    /* Crée des colonnes de 280px minimum qui s'adaptent toutes seules */
+    /* Crée des colonnes automatiques de 280px minimum */
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* 3. La Carte (L'objet annonce) */
+/* ============================================================
+   3. LA CARTE (Design & Animation)
+   ============================================================ */
 .card {
     background: #ffffff;
-    border-radius: 15px; /* Bords arrondis */
-    overflow: hidden; /* Pour que l'image ne dépasse pas des arrondis */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Ombre légère */
+    border-radius: 15px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    height: 100%; /* Important pour que toutes les cartes aient la même taille */
+    border: none !important; /* Enlève la bordure par défaut de Bootstrap */
 }
 
 .card:hover {
-    transform: translateY(-10px); /* Soulève la carte au survol */
+    transform: translateY(-10px); /* Effet de soulèvement au survol */
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* 4. L'Image (Correction de la largeur) */
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Recadre l'image sans l'écraser */
-    border-bottom: 1px solid #eee;
+/* ============================================================
+   4. GESTION DES IMAGES (Uniformisation)
+   ============================================================ */
+/* Conteneur pour centrer l'image proprement */
+.img-container {
+    height: 200px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 10px;
 }
 
-/* 5. Le contenu textuel */
-.card-content {
+/* L'image elle-même : entière et non coupée */
+.card-img-top {
+    max-height: 100% !important;
+    width: auto !important;
+    object-fit: contain !important; /* Garde les proportions sans couper */
+}
+
+/* ============================================================
+   5. CONTENU ET TITRES (Alignement)
+   ============================================================ */
+.card-body {
     padding: 20px;
-    flex-grow: 1;
+    flex-grow: 1; /* Pousse le bouton vers le bas */
+    text-align: center;
 }
 
-.card h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.2rem;
+/* On force le titre à ne faire qu'une ligne avec "..." */
+.card-title, .card-title a {
+    font-size: 1.1rem;
+    font-weight: bold;
     color: #2c3e50;
+    text-decoration: none;
+    
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important; /* Limite à 1 ligne */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .price {
     font-size: 1.4rem;
-    color: #e67e22; /* Orange Leboncoin */
+    color: #dc3545; /* Rouge pour le prix comme sur ta capture */
     font-weight: bold;
     margin-bottom: 15px;
 }
 
-.type {
-    display: inline-block;
-    background: #ecf0f1;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: #7f8c8d;
-    margin-bottom: 15px;
+/* ============================================================
+   6. BOUTONS
+   ============================================================ */
+.btn-outline-danger {
+    border-radius: 50px !important; /* Boutons arrondis "pill" */
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-/* 6. Le Bouton */
-.btn-voir {
-    display: block;
-    background-color: #3498db;
+.btn-outline-danger:hover {
+    background-color: #dc3545;
     color: white;
-    text-align: center;
-    padding: 12px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.btn-voir:hover {
-    background-color: #2980b9;
 }
